@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "palette": "Palette",
+    "about": "About",
+    "orderNow": "Order Now"
+  },
+  "hero": {
+    "tagline": "The Art of Fresh Juice",
+    "subtitle": "Every glass is a masterpiece — pressed to order, crafted with passion.",
+    "cta": "Explore Menu",
+    "badge": "100% Natural",
+    "createJuice": "Create my juice →"
+  },
+  "menu": {
+    "title": "Our Menu",
+    "subtitle": "Freshness & Creativity in every glass"
+  },
+  "palette": {
+    "badge": "Exclusive Concept",
+    "title": "The",
+    "highlight": "Picasso Palette",
+    "subtitle": "Pick up to 3 fruits and craft your liquid masterpiece.",
+    "order": "Order this juice",
+    "creationLabel": "Your creation:",
+    "hint": "Select 1 to 3 fruits to build your juice"
+  }
+}

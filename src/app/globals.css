@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-playfair: 'Playfair Display', serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter);
+  background-color: #FFFBF5;
+  color: #1A0A00;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Hide default cursor on desktop so custom cursor shows */
+@media (pointer: fine) {
+  *, *::before, *::after { cursor: none !important; }
+}
+
+/* Marquee scroll animation */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Fruit float — each fruit bobs with its own speed/delay via CSS vars */
+@keyframes fruitFloat {
+  0%, 100% { transform: translateY(0px)        rotate(0deg); }
+  30%       { transform: translateY(calc(var(--dy, 12px) * -1)) rotate(calc(var(--rot, 4deg) * -1)); }
+  70%       { transform: translateY(var(--dy, 12px))            rotate(var(--rot, 4deg)); }
+}
+
+/* Morphic blob animation — pure CSS, GPU composited, zero JS */
+@keyframes morphBlob {
+  0%,100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translate(0px, 0px) scale(1);
+  }
+  20% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    transform: translate(12px, -18px) scale(1.04);
+  }
+  40% {
+    border-radius: 50% 50% 30% 70% / 40% 60% 40% 60%;
+    transform: translate(-10px, 10px) scale(0.97);
+  }
+  60% {
+    border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+    transform: translate(8px, -8px) scale(1.02);
+  }
+  80% {
+    border-radius: 55% 45% 40% 60% / 50% 50% 50% 50%;
+    transform: translate(-6px, 14px) scale(0.98);
+  }
+}
+
+/* Smooth colour + opacity transitions on all interactive elements */
+a, button {
+  transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* GPU-hint for animated elements */
+.will-animate {
+  will-change: transform, opacity;
+}
+
+@layer utilities {
+  .text-gradient-summer {
+    @apply bg-gradient-to-r from-coral to-sunny bg-clip-text text-transparent;
+  }
+  .glass-light {
+    @apply bg-white/70 backdrop-blur-xl border border-white/80 shadow-sm;
+  }
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #FFF0D9; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#FF5A1F, #FFD34E);
+  border-radius: 9999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

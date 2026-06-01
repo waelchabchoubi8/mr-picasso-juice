@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "menu": "Menu",
+    "palette": "Palette",
+    "about": "À Propos",
+    "orderNow": "Commander"
+  },
+  "hero": {
+    "tagline": "L'Art du Jus Frais",
+    "subtitle": "Chaque verre est une œuvre d'art — pressé à la minute, livré avec passion.",
+    "cta": "Explorer le Menu",
+    "badge": "100% Naturel",
+    "createJuice": "Créer mon jus →"
+  },
+  "menu": {
+    "title": "Notre Carte",
+    "subtitle": "Fraîcheur & Créativité dans chaque verre"
+  },
+  "palette": {
+    "badge": "Concept Exclusif",
+    "title": "La Palette",
+    "highlight": "Picasso",
+    "subtitle": "Choisissez jusqu'à 3 fruits et composez votre chef-d'œuvre liquide.",
+    "order": "Commander ce jus",
+    "creationLabel": "Votre création:",
+    "hint": "Sélectionnez 1 à 3 fruits pour créer votre jus"
+  }
+}

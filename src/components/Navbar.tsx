@@ -4,6 +4,17 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter, usePathname, Link } from '@/navigation';
+import { useCart } from './CartContext';
+
+function CartIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <path d="M16 10a4 4 0 01-8 0" />
+    </svg>
+  );
+}
 
 const MAGNETIC_STRENGTH = 0.38;
 
@@ -48,8 +59,11 @@ export default function Navbar() {
   const locale = useLocale();
   const router = useRouter();
   const path   = usePathname();
+  const { totalItems, openCart } = useCart();
   const [scrolled,    setScrolled]    = useState(false);
   const [mobileOpen,  setMobileOpen]  = useState(false);
+  const [mounted,     setMounted]     = useState(false);
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 24);
@@ -122,8 +136,31 @@ export default function Navbar() {
             ))}
           </button>
 
+          {/* Cart icon button */}
+          <button
+            onClick={openCart}
+            aria-label="Ouvrir le panier"
+            className="relative flex items-center justify-center w-9 h-9 text-warm/55 hover:text-coral rounded-full hover:bg-coral/6 transition-all duration-200 cursor-pointer"
+          >
+            <CartIcon />
+            <AnimatePresence>
+              {mounted && totalItems > 0 && (
+                <motion.span
+                  key={totalItems}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  transition={{ type: 'spring', stiffness: 500, damping: 22 }}
+                  className="absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-0.5 bg-coral text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none"
+                >
+                  {totalItems > 99 ? '99+' : totalItems}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
+
           {/* Magnetic CTA — hidden on mobile, hamburger handles nav there */}
-          <MagneticButton className="hidden sm:flex relative overflow-hidden bg-coral text-white text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-full shadow-md shadow-coral/30 hover:shadow-coral/50 transition-shadow duration-300 cursor-pointer whitespace-nowrap group">
+          <MagneticButton onClick={openCart} className="hidden sm:flex relative overflow-hidden bg-coral text-white text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-full shadow-md shadow-coral/30 hover:shadow-coral/50 transition-shadow duration-300 cursor-pointer whitespace-nowrap group">
             <span className="relative z-10">{t('orderNow')}</span>
             <span className="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
           </MagneticButton>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { useCart } from './CartContext';
 
 // ─── Format icons ────────────────────────────────────────────────────────────
 
@@ -126,12 +127,35 @@ function PlusIcon() {
   );
 }
 
+function CheckIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function JuiceMenu() {
   const t = useTranslations('menu');
+  const { addItem } = useCart();
   const [active, setActive] = useState<'bouteille' | 'grand' | 'petit'>('bouteille');
+  const [addedId, setAddedId] = useState<string | null>(null);
   const current = CATALOGUE.find(c => c.id === active)!;
+
+  const handleAdd = (item: { name: string; desc: string; price: string }) => {
+    const id = `${active}-${item.name}`;
+    addItem({
+      id,
+      name:   item.name,
+      format: `${current.label} · ${current.sub}`,
+      price:  parseFloat(item.price.replace(',', '.')),
+      color:  current.color,
+    });
+    setAddedId(id);
+    setTimeout(() => setAddedId(id => (id === `${active}-${item.name}` ? null : id)), 1200);
+  };
 
   return (
     <section id="menu" className="py-16 lg:py-28 px-4 sm:px-6 bg-[#FFFBF5]/95">
@@ -217,11 +241,12 @@ export default function JuiceMenu() {
                   <motion.button
                     whileHover={{ scale: 1.15 }}
                     whileTap={{ scale: 0.9 }}
-                    className="w-7 h-7 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
-                    style={{ background: current.color }}
+                    onClick={e => { e.stopPropagation(); handleAdd(item); }}
+                    className="w-7 h-7 rounded-full flex items-center justify-center text-white opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
+                    style={{ background: addedId === `${active}-${item.name}` ? '#22c55e' : current.color }}
                     aria-label={`Ajouter ${item.name}`}
                   >
-                    <PlusIcon />
+                    {addedId === `${active}-${item.name}` ? <CheckIcon /> : <PlusIcon />}
                   </motion.button>
                 </div>
               </motion.div>

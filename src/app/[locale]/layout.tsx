@@ -5,6 +5,8 @@ import { getMessages } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { CustomCursor } from '@/components/CustomCursor';
 import { FruitBackground } from '@/components/FruitBackground';
+import { CartProvider } from '@/components/CartContext';
+import CartDrawer from '@/components/CartDrawer';
 import '../globals.css';
 
 const playfair = Playfair_Display({
@@ -56,9 +58,12 @@ export default async function LocaleLayout({
         <CustomCursor />
         <FruitBackground />
 
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <CartProvider>
+          <NextIntlClientProvider messages={messages}>
+            {children}
+            <CartDrawer />
+          </NextIntlClientProvider>
+        </CartProvider>
       </body>
     </html>
   );

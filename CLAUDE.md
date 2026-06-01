@@ -21,8 +21,14 @@ npx tsc --noEmit # TypeScript check (run before reporting done)
 ## Project structure
 ```
 src/
-  app/[locale]/      → layout.tsx (fonts + cursor + fruit bg) + page.tsx
-  components/        → all UI components
+  app/[locale]/      → layout.tsx (fonts + cursor + fruit bg + CartProvider) + page.tsx
+  components/
+    CartContext.tsx  → useReducer cart state + CartProvider + useCart hook (localStorage)
+    CartDrawer.tsx   → slide-out cart panel (items, qty, form, WhatsApp CTA)
+    Navbar.tsx       → cart icon + badge (opens drawer)
+    JuiceMenu.tsx    → + button wired to addItem (always visible on mobile)
+    PicassoPalette.tsx → Order button wired to addItem + openCart
+    ...all other UI components
   i18n/              → routing.ts + request.ts
   navigation.ts      → createNavigation exports
   middleware.ts      → locale detection
@@ -84,12 +90,39 @@ router.push(pathname, { locale: 'en' });
 - Hero right column: `hidden lg:block` — mobile fruit row uses `lg:hidden`
 - Navbar CTA: `hidden sm:flex` on mobile
 
+## Cart
+
+### CartItem shape
+```ts
+{ id, name, format, price: number, qty, color, fruits?: string[] }
+```
+
+### Adding items from a new component
+```tsx
+import { useCart } from './CartContext';
+const { addItem, openCart } = useCart();
+addItem({ id: 'unique-id', name, format: 'Label · size', price: 7.5, color: '#hex' });
+```
+
+### Cart item IDs
+- Menu items: `${formatId}-${itemName}` e.g. `"bouteille-Orange Soleil"`
+- Palette items: `palette-${sortedFruitIds.join('-')}` e.g. `"palette-lime-mango"`
+- Same id → qty increments instead of duplicate entry
+
+### Mobile + button visibility
+Menu `+` buttons use `opacity-100 sm:opacity-0 group-hover:opacity-100` — always visible on mobile, hover-only on desktop.
+
+### iOS input zoom fix
+Use `text-base sm:text-sm` on all `<input>` inside CartDrawer to prevent iOS Safari zoom (16px min).
+
 ## Prices (TND)
 - Bouteille 1L: 12–14 TND
 - Grand Cup 500ml: 7–7.5 TND
 - Petit Cup 250ml: 4.5–5 TND
+- Palette personnalisée: 7.5 TND (constant `PALETTE_PRICE` in `PicassoPalette.tsx`)
 
 ## Before going live
 - [ ] Replace WhatsApp number in `WhatsAppButton.tsx` (`PHONE = '21600000000'`)
+- [ ] Replace WhatsApp number in `CartDrawer.tsx` (`WHATSAPP_NUMBER = '21600000000'`)
 - [ ] Replace address, phone, email, social links in `Footer.tsx`
 - [ ] Add real Instagram/Facebook/TikTok URLs

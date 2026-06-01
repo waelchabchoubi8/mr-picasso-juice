@@ -151,7 +151,22 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/25">
           <p>© 2025 Mr. Picasso Juice · Tunis, Tunisie · Tous droits réservés</p>
-          <p>Fait avec passion 🍊</p>
+          <a
+            href="https://ait-tun.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-white/25 hover:text-white/60 transition-colors duration-200 group"
+          >
+            <span>Conçu &amp; développé par</span>
+            {/* AIT logo */}
+            <span className="flex items-center gap-1.5">
+              <svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-50 group-hover:opacity-90 transition-opacity">
+                <circle cx="20" cy="20" r="20" fill="#FFFFFF" fillOpacity="0.15"/>
+                <text x="20" y="26" textAnchor="middle" fill="white" fontFamily="Georgia, 'Times New Roman', serif" fontWeight="700" fontSize="16">a.</text>
+              </svg>
+              <span className="font-semibold tracking-wide text-white/40 group-hover:text-white/70 transition-colors">AIT</span>
+            </span>
+          </a>
         </div>
       </div>
     </footer>

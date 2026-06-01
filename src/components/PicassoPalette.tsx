@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { useCart } from './CartContext';
+
+const PALETTE_PRICE = 7.5;
 
 // ─── Animated Bottle SVG ──────────────────────────────────────────────────────
 
@@ -151,6 +154,7 @@ function CheckIcon() {
 
 export default function PicassoPalette() {
   const t = useTranslations('palette');
+  const { addItem, openCart } = useCart();
   const [selected, setSelected] = useState<FruitId[]>([]);
 
   const toggle = (id: FruitId) =>
@@ -162,6 +166,20 @@ export default function PicassoPalette() {
   const fillPercent     = (selected.length / 3) * 100;
   const fruitColors     = selectedFruits.map(f => f.color);
   const blendColor      = selectedFruits[Math.floor(selectedFruits.length / 2)]?.color ?? '#FF5A1F';
+
+  const handleOrderPalette = () => {
+    if (!selectedFruits.length) return;
+    const sortedIds = [...selected].sort();
+    addItem({
+      id:     `palette-${sortedIds.join('-')}`,
+      name:   selectedFruits.map(f => f.name).join(' × '),
+      format: 'Palette · 500ml',
+      price:  PALETTE_PRICE,
+      color:  blendColor,
+      fruits: selectedFruits.map(f => f.name),
+    });
+    openCart();
+  };
 
   return (
     <section
@@ -287,12 +305,17 @@ export default function PicassoPalette() {
                   className="w-full max-w-xs bg-white border border-warm/10 rounded-2xl p-5 shadow-md shadow-warm/5 text-center"
                 >
                   <p className="text-warm/35 text-xs uppercase tracking-widest mb-1">{t('creationLabel')}</p>
-                  <p className="font-playfair text-warm text-lg font-bold mb-4 leading-snug">
+                  <p className="font-playfair text-warm text-lg font-bold mb-1 leading-snug">
                     {selectedFruits.map(f => f.name).join(' × ')}
+                  </p>
+                  <p className="font-playfair text-warm/40 text-sm mb-4">
+                    {PALETTE_PRICE.toFixed(3).replace('.', ',')}
+                    <span className="text-warm/30 text-xs ml-1">TND · 500ml</span>
                   </p>
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
+                    onClick={handleOrderPalette}
                     className="w-full font-semibold py-3 rounded-xl cursor-pointer text-white"
                     style={{ background: blendColor, boxShadow: `0 6px 20px ${blendColor}38` }}
                   >

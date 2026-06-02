@@ -1,4 +1,4 @@
-# Mr. Picasso Juice
+# AIT Juice
 
 Premium artisanal juice store — Tunis, Tunisia.
 
@@ -112,7 +112,7 @@ WhatsAppButton (fixed)
 | `WhatsAppButton.tsx` | `PHONE = '21600000000'` | Real WhatsApp number |
 | `Footer.tsx` | `Votre adresse, Tunis` | Real store address |
 | `Footer.tsx` | `+216 00 000 000` | Real phone number |
-| `Footer.tsx` | `contact@mrpicassojuice.tn` | Real email |
+| `Footer.tsx` | `contact@aitjuice.tn` | Real email |
 | `Footer.tsx` | Social `href="#"` | Real Instagram/Facebook/TikTok URLs |
 
 ---

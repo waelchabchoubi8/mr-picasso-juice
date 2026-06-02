@@ -1,4 +1,4 @@
-# Mr. Picasso Juice — Claude Context
+# AIT Juice — Claude Context
 
 Premium artisanal juice store for **Tunis, Tunisia**.
 

@@ -65,7 +65,7 @@ export function AboutSection() {
               <span className="italic text-coral">fait avec passion</span>
             </h2>
             <p className="text-warm/60 text-lg leading-relaxed mb-4">
-              Mr. Picasso Juice est né d&apos;une conviction simple : un bon jus peut transformer une journée ordinaire en moment de bonheur pur.
+              AIT Juice est né d&apos;une conviction simple : un bon jus peut transformer une journée ordinaire en moment de bonheur pur.
             </p>
             <p className="text-warm/55 text-base leading-relaxed">
               Depuis 2020, nous sélectionnons chaque matin les meilleurs fruits du marché tunisien pour créer des jus qui ont le goût de la fraîcheur absolue. Chaque verre est une œuvre d&apos;art — pressé à la minute, livré avec soin.

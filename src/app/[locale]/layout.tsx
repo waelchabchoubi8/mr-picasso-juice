@@ -26,13 +26,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Mr. Picasso Juice — L\'Art du Jus Frais',
+  title: 'AIT Juice — L\'Art du Jus Frais',
   description: 'Premium artisanal juice store. Every glass is a masterpiece.',
-  applicationName: 'Mr. Picasso Juice',
+  applicationName: 'AIT Juice',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Picasso Juice',
+    title: 'AIT Juice',
   },
   formatDetection: { telephone: false },
   icons: {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   openGraph: {
-    title: 'Mr. Picasso Juice',
+    title: 'AIT Juice',
     description: 'Premium artisanal juice — pressed to order, crafted with passion.',
     type: 'website',
   },

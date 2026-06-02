@@ -2,8 +2,8 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Mr. Picasso Juice — L\'Art du Jus Frais',
-    short_name: 'Picasso Juice',
+    name: 'AIT Juice — L\'Art du Jus Frais',
+    short_name: 'AIT Juice',
     description: 'Jus artisanaux pressés à la commande. Réservez, commandez et faites-vous livrer à Sfax.',
     start_url: '/fr',
     scope: '/',

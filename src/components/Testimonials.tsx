@@ -23,14 +23,14 @@ const REVIEWS = [
     name: 'Fatma R.',
     city: 'Carthage',
     rating: 5,
-    text: 'La Palette Picasso est une idée géniale ! J\'ai créé mon propre mélange mangue × fraise et c\'était incroyable.',
+    text: 'La Palette AIT est une idée géniale ! J\'ai créé mon propre mélange mangue × fraise et c\'était incroyable.',
     fruit: '🍓',
   },
   {
     name: 'Youssef M.',
     city: 'Ennasr',
     rating: 5,
-    text: 'Qualité constante, livraison rapide. Mr. Picasso Juice c\'est notre spot numéro un à Tunis.',
+    text: 'Qualité constante, livraison rapide. AIT Juice c\'est notre spot numéro un à Tunis.',
     fruit: '🍋',
   },
 ];

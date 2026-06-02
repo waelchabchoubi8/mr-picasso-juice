@@ -72,7 +72,7 @@ function buildWhatsAppMessage(
   const grandTotal = method === 'pickup' ? total : total + DELIVERY_FEE;
 
   return [
-    'Bonjour Mr. Picasso Juice! 🎨',
+    'Bonjour AIT Juice! 🎨',
     '',
     contact,
     '',

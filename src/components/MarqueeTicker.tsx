@@ -4,7 +4,7 @@ const ITEMS = [
   'Pressé à la minute',
   '100% Naturel',
   'Tunis · Tunisie',
-  'Mr. Picasso Juice',
+  'AIT Juice',
   'Sans Additifs',
   'Jus Artisanal',
   '24 Recettes',

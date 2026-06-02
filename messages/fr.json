@@ -9,9 +9,9 @@
   },
   "pwa": {
     "install": "Installer l'app",
-    "tagline": "L'app Picasso, sur votre écran d'accueil",
+    "tagline": "L'app AIT Juice, sur votre écran d'accueil",
     "titleAndroid": "Installer l'application",
-    "subtitleAndroid": "Ajoutez Mr. Picasso Juice à votre écran d'accueil et commandez en un seul tap.",
+    "subtitleAndroid": "Ajoutez AIT Juice à votre écran d'accueil et commandez en un seul tap.",
     "installCta": "Installer maintenant",
     "titleIOS": "Ajouter à l'écran d'accueil",
     "subtitleIOS": "Installez l'app en 2 étapes depuis Safari :",
@@ -41,7 +41,7 @@
   "palette": {
     "badge": "Concept Exclusif",
     "title": "La Palette",
-    "highlight": "Picasso",
+    "highlight": "AIT",
     "subtitle": "Choisissez jusqu'à 3 fruits et composez votre chef-d'œuvre liquide.",
     "order": "Commander ce jus",
     "creationLabel": "Votre création:",

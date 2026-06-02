@@ -147,7 +147,7 @@ export function LoadingScreen({ onDone }: LoadingScreenProps) {
             className="text-center"
           >
             <p className="font-playfair text-4xl font-bold text-warm tracking-tight">
-              Mr. <span className="italic text-coral">Picasso</span> Juice
+              AIT <span className="italic text-coral">Juice</span>
             </p>
             <p className="text-warm/35 text-xs tracking-[0.3em] uppercase mt-1">Tunis · Tunisie</p>
           </motion.div>

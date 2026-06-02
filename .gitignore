@@ -21,6 +21,14 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Archives (never commit project archives — too large for git/GitHub)
+*.rar
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+
 # OS
 .DS_Store
 Thumbs.db

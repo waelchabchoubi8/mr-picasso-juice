@@ -17,8 +17,8 @@ export default function HomePage() {
         <HeroSection />
         <MarqueeTicker />
         <JuiceMenu />
-        <Testimonials />
         <PicassoPalette />
+        <Testimonials />
         <AboutSection />
       </main>
       <Footer />

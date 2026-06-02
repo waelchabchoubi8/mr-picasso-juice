@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useCart } from './CartContext';
 
-const PALETTE_PRICE = 7.5;
+const PALETTE_PRICE     = 7.5;
+const PALETTE_PRICE_1L  = 14;
 
 // ─── Animated Bottle SVG ──────────────────────────────────────────────────────
 
@@ -155,7 +156,8 @@ function CheckIcon() {
 export default function PicassoPalette() {
   const t = useTranslations('palette');
   const { addItem, openCart } = useCart();
-  const [selected, setSelected] = useState<FruitId[]>([]);
+  const [selected, setSelected]         = useState<FruitId[]>([]);
+  const [paletteFormat, setPaletteFormat] = useState<'500ml' | '1l'>('500ml');
 
   const toggle = (id: FruitId) =>
     setSelected(prev =>
@@ -170,11 +172,12 @@ export default function PicassoPalette() {
   const handleOrderPalette = () => {
     if (!selectedFruits.length) return;
     const sortedIds = [...selected].sort();
+    const is1L      = paletteFormat === '1l';
     addItem({
-      id:     `palette-${sortedIds.join('-')}`,
+      id:     `palette-${sortedIds.join('-')}-${paletteFormat}`,
       name:   selectedFruits.map(f => f.name).join(' × '),
-      format: 'Palette · 500ml',
-      price:  PALETTE_PRICE,
+      format: is1L ? 'Palette · 1L' : 'Palette · 500ml',
+      price:  is1L ? PALETTE_PRICE_1L : PALETTE_PRICE,
       color:  blendColor,
       fruits: selectedFruits.map(f => f.name),
     });
@@ -309,9 +312,27 @@ export default function PicassoPalette() {
                     {selectedFruits.map(f => f.name).join(' × ')}
                   </p>
                   <p className="font-playfair text-warm/40 text-sm mb-4">
-                    {PALETTE_PRICE.toFixed(3).replace('.', ',')}
-                    <span className="text-warm/30 text-xs ml-1">TND · 500ml</span>
+                    {(paletteFormat === '1l' ? PALETTE_PRICE_1L : PALETTE_PRICE).toFixed(3).replace('.', ',')}
+                    <span className="text-warm/30 text-xs ml-1">TND · {paletteFormat === '1l' ? '1L' : '500ml'}</span>
                   </p>
+
+                  {/* Format toggle */}
+                  <div className="flex items-center bg-warm/6 rounded-xl p-1 mb-4 gap-1">
+                    {(['500ml', '1l'] as const).map(fmt => (
+                      <button
+                        key={fmt}
+                        onClick={() => setPaletteFormat(fmt)}
+                        className="flex-1 py-2 rounded-lg text-xs font-semibold transition-all duration-250 cursor-pointer"
+                        style={paletteFormat === fmt
+                          ? { background: blendColor, color: '#fff', boxShadow: `0 2px 10px ${blendColor}45` }
+                          : { color: '#1A0A0045' }
+                        }
+                      >
+                        {fmt === '500ml' ? '500 ml — 7,500 TND' : '1 Litre — 14,000 TND'}
+                      </button>
+                    ))}
+                  </div>
+
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}

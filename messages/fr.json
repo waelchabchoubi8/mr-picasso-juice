@@ -4,7 +4,28 @@
     "menu": "Menu",
     "palette": "Palette",
     "about": "À Propos",
-    "orderNow": "Commander"
+    "orderNow": "Commander",
+    "install": "Installer l'app"
+  },
+  "pwa": {
+    "install": "Installer l'app",
+    "tagline": "L'app Picasso, sur votre écran d'accueil",
+    "titleAndroid": "Installer l'application",
+    "subtitleAndroid": "Ajoutez Mr. Picasso Juice à votre écran d'accueil et commandez en un seul tap.",
+    "installCta": "Installer maintenant",
+    "titleIOS": "Ajouter à l'écran d'accueil",
+    "subtitleIOS": "Installez l'app en 2 étapes depuis Safari :",
+    "iosStep1": "Touchez le bouton Partager",
+    "iosStep1Detail": "en bas de l'écran Safari",
+    "iosStep2": "Choisissez « Sur l'écran d'accueil »",
+    "iosStep2Detail": "puis touchez « Ajouter »",
+    "iosNote": "Astuce : ouvrez ce site dans Safari si ce n'est pas déjà le cas.",
+    "androidStep1": "Ouvrez le menu (⋮) de votre navigateur",
+    "androidStep2": "Touchez « Installer l'application »",
+    "close": "Fermer",
+    "benefit1": "Plein écran, sans barre d'adresse",
+    "benefit2": "Fonctionne même hors-ligne",
+    "benefit3": "Commandez en un seul tap"
   },
   "hero": {
     "tagline": "L'Art du Jus Frais",

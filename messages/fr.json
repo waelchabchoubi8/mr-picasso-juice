@@ -1,17 +1,17 @@
 {
   "nav": {
     "home": "Accueil",
-    "menu": "Menu",
-    "palette": "Palette",
-    "about": "À Propos",
+    "menu": "Catalogue",
+    "palette": "Coffret",
+    "about": "Notre Histoire",
     "orderNow": "Commander",
     "install": "Installer l'app"
   },
   "pwa": {
     "install": "Installer l'app",
-    "tagline": "L'app AIT Juice, sur votre écran d'accueil",
+    "tagline": "L'app Masmoudi, sur votre écran d'accueil",
     "titleAndroid": "Installer l'application",
-    "subtitleAndroid": "Ajoutez AIT Juice à votre écran d'accueil et commandez en un seul tap.",
+    "subtitleAndroid": "Ajoutez Masmoudi à votre écran d'accueil et commandez en un seul tap.",
     "installCta": "Installer maintenant",
     "titleIOS": "Ajouter à l'écran d'accueil",
     "subtitleIOS": "Installez l'app en 2 étapes depuis Safari :",
@@ -28,23 +28,40 @@
     "benefit3": "Commandez en un seul tap"
   },
   "hero": {
-    "tagline": "L'Art du Jus Frais",
-    "subtitle": "Chaque verre est une œuvre d'art — pressé à la minute, livré avec passion.",
-    "cta": "Explorer le Menu",
-    "badge": "100% Naturel",
-    "createJuice": "Créer mon jus →"
+    "tagline": "Pâtisserie d'Exception",
+    "subtitle": "Baklawa, makroud, mlabes… La pâtisserie tunisienne d'exception. Composez votre coffret et savourez la tradition.",
+    "cta": "Voir le Catalogue",
+    "badge": "Depuis 1969 · Sfax",
+    "createJuice": "Composer mon coffret →"
   },
   "menu": {
-    "title": "Notre Carte",
-    "subtitle": "Fraîcheur & Créativité dans chaque verre"
+    "title": "Nos Pâtisseries",
+    "subtitle": "L'excellence de la pâtisserie tunisienne, pièce par pièce"
   },
-  "palette": {
+  "builder": {
     "badge": "Concept Exclusif",
-    "title": "La Palette",
-    "highlight": "AIT",
-    "subtitle": "Choisissez jusqu'à 3 fruits et composez votre chef-d'œuvre liquide.",
-    "order": "Commander ce jus",
-    "creationLabel": "Votre création:",
-    "hint": "Sélectionnez 1 à 3 fruits pour créer votre jus"
+    "title": "Composez Votre",
+    "highlight": "Coffret",
+    "subtitle": "Choisissez la taille de votre boîte, puis remplissez-la des pâtisseries que vous aimez.",
+    "chooseSize": "1. Choisissez la taille",
+    "fillBox": "2. Remplissez votre coffret",
+    "hint": "Remplissez toutes les pièces pour commander votre coffret",
+    "addToCart": "Ajouter au panier",
+    "reset": "Réinitialiser",
+    "creationLabel": "Votre coffret :",
+    "emptyHint": "Choisissez une taille pour commencer",
+    "pieces": "pièces",
+    "remaining": "restantes",
+    "popular": "Populaire",
+    "save": "Économisez",
+    "from": "dès",
+    "total": "Total",
+    "react": {
+      "start": "Choisissez la taille de votre coffret.",
+      "low": "Joli début !",
+      "mid": "Continuez, c'est superbe…",
+      "high": "Presque parfait ! Encore {remaining}.",
+      "full": "Magnifique coffret !"
+    }
   }
 }

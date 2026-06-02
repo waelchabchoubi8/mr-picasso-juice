@@ -1,15 +1,15 @@
 'use client';
 
 const ITEMS = [
-  'Pressé à la minute',
-  '100% Naturel',
-  'Tunis · Tunisie',
-  'AIT Juice',
-  'Sans Additifs',
-  'Jus Artisanal',
-  '24 Recettes',
-  'Fraîcheur Garantie',
-  'Bouteille · Grand Cup · Petit Cup',
+  'Pâtisserie d\'Exception',
+  'Depuis 1969',
+  'Sfax · Tunisie',
+  'Masmoudi',
+  'Pistache d\'Alep',
+  'Baklawa · Makroud · Mlabes',
+  'Fait Main',
+  'Coffrets sur Mesure',
+  'Livraison partout en Tunisie',
 ];
 
 const SEP = '·';

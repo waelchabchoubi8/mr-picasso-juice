@@ -2,15 +2,15 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'AIT Juice — L\'Art du Jus Frais',
-    short_name: 'AIT Juice',
-    description: 'Jus artisanaux pressés à la commande. Réservez, commandez et faites-vous livrer à Sfax.',
+    name: 'Masmoudi — Pâtisserie d\'Exception',
+    short_name: 'Masmoudi',
+    description: 'Pâtisserie tunisienne d\'exception depuis 1969. Composez votre coffret et faites-vous livrer partout en Tunisie.',
     start_url: '/fr',
     scope: '/',
     display: 'standalone',
     orientation: 'portrait',
     background_color: '#FFFBF5',
-    theme_color: '#FF5A1F',
+    theme_color: '#6C5CE7',
     lang: 'fr',
     categories: ['food', 'shopping', 'lifestyle'],
     icons: [

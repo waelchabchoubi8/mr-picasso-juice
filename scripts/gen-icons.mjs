@@ -1,5 +1,5 @@
 // Generates PWA PNG icons (no external deps — pure Node zlib + Buffer).
-// Renders a coral→sunny gradient square with a white juice cup + straw.
+// Renders a purple gradient square with a white Masmoudi "M" monogram.
 // Run: node scripts/gen-icons.mjs
 import { deflateSync } from 'node:zlib';
 import { writeFileSync, mkdirSync } from 'node:fs';
@@ -55,40 +55,34 @@ function encodePNG(width, height, rgba) {
 // ---- geometry helpers (normalized 0..1 coords) ----
 const lerp = (a, b, t) => a + (b - a) * t;
 function mixColor(t) {
-  // coral #FF5A1F -> sunny #FFD34E
+  // deep purple #5546C4 -> Masmoudi purple #6C5CE7
   return [
-    Math.round(lerp(255, 255, t)),
-    Math.round(lerp(90, 211, t)),
-    Math.round(lerp(31, 78, t)),
+    Math.round(lerp(85, 108, t)),
+    Math.round(lerp(70, 92, t)),
+    Math.round(lerp(196, 231, t)),
   ];
 }
-function inCup(x, y) {
-  // trapezoid body
-  if (y < 0.34 || y > 0.76) return false;
-  const tt = (y - 0.34) / (0.42);
-  const left = 0.31 + 0.075 * tt;
-  const right = 0.69 - 0.075 * tt;
-  return x >= left && x <= right;
+// distance from a point to a line segment (for drawing thick M strokes)
+function distSeg(px, py, ax, ay, bx, by) {
+  const dx = bx - ax, dy = by - ay;
+  const l2 = dx * dx + dy * dy;
+  let t = l2 ? ((px - ax) * dx + (py - ay) * dy) / l2 : 0;
+  t = Math.max(0, Math.min(1, t));
+  const cx = ax + t * dx, cy = ay + t * dy;
+  return Math.hypot(px - cx, py - cy);
 }
-function inRim(x, y) {
-  // elliptical rim cap at top of cup
-  const cx = 0.5, cy = 0.34, rx = 0.19, ry = 0.045;
-  const dx = (x - cx) / rx, dy = (y - cy) / ry;
-  return dx * dx + dy * dy <= 1;
-}
-function inStraw(x, y) {
-  // thin rotated rect (the straw) poking out top-right
-  const pivotX = 0.56, pivotY = 0.30;
-  const ang = -0.45; // radians
-  const dx = x - pivotX, dy = y - pivotY;
-  const lx = dx * Math.cos(ang) - dy * Math.sin(ang);
-  const ly = dx * Math.sin(ang) + dy * Math.cos(ang);
-  const halfW = 0.028;
-  return Math.abs(lx) <= halfW && ly >= -0.20 && ly <= 0.16;
-}
-// white shape = cup body OR rim OR straw
+// Masmoudi "M" monogram strokes (normalized 0..1)
+const M_SEGS = [
+  [0.30, 0.72, 0.30, 0.30],
+  [0.30, 0.30, 0.50, 0.56],
+  [0.50, 0.56, 0.70, 0.30],
+  [0.70, 0.30, 0.70, 0.72],
+];
+// white shape = within stroke half-width of any M segment
 function inShape(x, y) {
-  return inCup(x, y) || inRim(x, y) || inStraw(x, y);
+  const hw = 0.058;
+  for (const s of M_SEGS) if (distSeg(x, y, s[0], s[1], s[2], s[3]) <= hw) return true;
+  return false;
 }
 
 function render(size, { pad = 0 } = {}) {

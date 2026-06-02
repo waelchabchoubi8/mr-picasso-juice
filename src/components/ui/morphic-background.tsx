@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const PALETTES = [
   // coral phase
-  ['#FF5A1F', '#FF8C60', '#FFB085'],
+  ['#6C5CE7', '#FF8C60', '#FFB085'],
   // yellow phase
   ['#FFD34E', '#FFCA28', '#FFB800'],
   // teal phase

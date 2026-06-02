@@ -14,14 +14,19 @@ const config: Config = {
         sans: ['var(--font-inter)', 'Inter', 'sans-serif'],
       },
       colors: {
-        coral:  '#FF5A1F',
-        sunny:  '#FFD34E',
-        teal:   '#3ECFB0',
-        lime:   '#7ED95A',
-        peach:  '#FFB085',
-        cream:  '#FFFBF5',
-        sand:   '#FFF0D9',
-        warm:   '#1A0A00',
+        // `coral` keeps its name (used widely as bg-coral/text-coral) but its
+        // value is now Masmoudi purple — re-skins the whole site at once.
+        coral:    '#6C5CE7',  // Masmoudi purple (primary)
+        grape:    '#5546C4',  // deep purple (depth)
+        lilac:    '#A99BF5',  // light purple
+        sunny:    '#FFD34E',  // gold accent (royal purple + gold)
+        pistache: '#9CCC65',  // pistachio green (the "pistache" range)
+        teal:     '#3ECFB0',
+        lime:     '#7ED95A',
+        peach:    '#FFB085',
+        cream:    '#FFFBF5',
+        sand:     '#FFF0D9',
+        warm:     '#1A0A00',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

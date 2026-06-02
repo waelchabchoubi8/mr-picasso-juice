@@ -14,90 +14,91 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: SPRING } },
 };
 
-// ─── Hero fruit illustrations ─────────────────────────────────────────────────
+// ─── Hero pâtisserie illustrations (line-art, semi-transparent) ────────────────
 
 // Pre-computed at module level — avoids server/client floating-point mismatch
 const round1 = (n: number) => Math.round(n * 10) / 10;
 
-const ORANGE_LINES_200 = [0, 60, 120, 180, 240, 300].map(a => {
+// Dashed decorative ring ticks for the monogram medallion.
+const MEDALLION_TICKS = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(a => {
   const r = (a * Math.PI) / 180;
   return {
-    x1: round1(100 + 32 * Math.cos(r)), y1: round1(100 + 32 * Math.sin(r)),
-    x2: round1(100 + 90 * Math.cos(r)), y2: round1(100 + 90 * Math.sin(r)),
+    x1: round1(100 + 70 * Math.cos(r)), y1: round1(100 + 70 * Math.sin(r)),
+    x2: round1(100 + 78 * Math.cos(r)), y2: round1(100 + 78 * Math.sin(r)),
   };
 });
 
-function OrangeSlice({ className }: { className?: string }) {
+// Masmoudi "M" monogram medallion — the brand mark.
+function MonogramMedallion({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 200 200" className={className} fill="none">
-      <circle cx="100" cy="100" r="90" fill="#FF5A1F" fillOpacity="0.12" stroke="#FF5A1F" strokeWidth="3" strokeOpacity="0.5"/>
-      <circle cx="100" cy="100" r="32"  fill="#FF5A1F" fillOpacity="0.18" stroke="#FF5A1F" strokeWidth="2" strokeOpacity="0.5"/>
-      {ORANGE_LINES_200.map((l, i) => (
-        <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2}
-          stroke="#FF5A1F" strokeWidth="1.8" strokeOpacity="0.4"/>
+      <circle cx="100" cy="100" r="92" fill="#6C5CE7" fillOpacity="0.12" stroke="#6C5CE7" strokeWidth="3" strokeOpacity="0.5" />
+      <circle cx="100" cy="100" r="84" stroke="#6C5CE7" strokeWidth="1.2" strokeOpacity="0.3" />
+      {MEDALLION_TICKS.map((l, i) => (
+        <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="#6C5CE7" strokeWidth="2" strokeOpacity="0.4" />
       ))}
+      {/* double-loop M */}
+      <path d="M64 138 L64 76 C64 66 76 62 82 72 L100 104 L118 72 C124 62 136 66 136 76 L136 138"
+        stroke="#6C5CE7" strokeWidth="7" strokeOpacity="0.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M100 104 L100 132" stroke="#6C5CE7" strokeWidth="7" strokeOpacity="0.6" strokeLinecap="round" />
     </svg>
   );
 }
 
-function LemonSlice({ className }: { className?: string }) {
+// Baklawa — layered diamond with a pistachio centre.
+function BaklawaDiamond({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 180 130" className={className} fill="none">
-      <ellipse cx="90" cy="65" rx="80" ry="52" fill="#FFD34E" fillOpacity="0.14" stroke="#FFD34E" strokeWidth="2.5" strokeOpacity="0.55"/>
-      <ellipse cx="90" cy="65" rx="80" ry="52" stroke="#FFD34E" strokeWidth="1" strokeOpacity="0.3"
-        strokeDasharray="0" fill="none"/>
-      <path d="M10 65 Q90 28 170 65 Q90 102 10 65Z" fill="#FFD34E" fillOpacity="0.08" stroke="#FFD34E" strokeWidth="1.5" strokeOpacity="0.35"/>
-      <circle cx="90" cy="65" r="16" fill="#FFD34E" fillOpacity="0.2" stroke="#FFD34E" strokeWidth="1.5" strokeOpacity="0.45"/>
-      <path d="M90 13 Q108 2 112 15" stroke="#7ED95A" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.6"/>
-      <path d="M90 117 Q72 128 68 115" stroke="#7ED95A" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.6"/>
+    <svg viewBox="0 0 160 160" className={className} fill="none">
+      <path d="M80 14 L146 80 L80 146 L14 80 Z" fill="#C9A24B" fillOpacity="0.14" stroke="#C9A24B" strokeWidth="3" strokeOpacity="0.5" />
+      <path d="M80 36 L124 80 L80 124 L36 80 Z" stroke="#C9A24B" strokeWidth="1.5" strokeOpacity="0.4" />
+      <path d="M30 64 L130 64 M30 96 L130 96" stroke="#C9A24B" strokeWidth="1.5" strokeOpacity="0.32" />
+      <circle cx="80" cy="80" r="15" fill="#7ED95A" fillOpacity="0.3" stroke="#7ED95A" strokeWidth="2" strokeOpacity="0.5" />
     </svg>
   );
 }
 
-function StrawberryFruit({ className }: { className?: string }) {
+// Gift box / coffret with lid and ribbon.
+function GiftBox({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 110 140" className={className} fill="none">
-      <path d="M55 128 C22 100 6 70 12 42 C18 18 38 10 55 20 C72 10 92 18 98 42 C104 70 88 100 55 128Z"
-        fill="#FF5B7A" fillOpacity="0.15" stroke="#FF5B7A" strokeWidth="2.5" strokeOpacity="0.5"/>
-      {[[40,52],[58,44],[52,70],[68,65],[40,78],[60,82]].map(([x,y],i)=>(
-        <ellipse key={i} cx={x} cy={y} rx="3" ry="3.5" fill="#FF5B7A" fillOpacity="0.3"/>
-      ))}
-      <path d="M55 20 C48 4 30 0 26 14" stroke="#7ED95A" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.65"/>
-      <path d="M55 20 C58 2 76 -2 80 12"  stroke="#7ED95A" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.65"/>
-      <path d="M55 20 L55 8"              stroke="#7ED95A" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.65"/>
+    <svg viewBox="0 0 170 170" className={className} fill="none">
+      {/* base */}
+      <rect x="30" y="64" width="110" height="84" rx="8" fill="#6C5CE7" fillOpacity="0.12" stroke="#6C5CE7" strokeWidth="2.8" strokeOpacity="0.5" />
+      {/* lid */}
+      <rect x="22" y="48" width="126" height="26" rx="7" fill="#6C5CE7" fillOpacity="0.18" stroke="#6C5CE7" strokeWidth="2.8" strokeOpacity="0.55" />
+      {/* ribbon vertical */}
+      <rect x="78" y="48" width="14" height="100" fill="#FFD34E" fillOpacity="0.25" stroke="#FFD34E" strokeWidth="2" strokeOpacity="0.5" />
+      {/* bow */}
+      <path d="M85 48 C70 28 44 32 60 50 C44 46 50 30 85 48Z" fill="#FFD34E" fillOpacity="0.2" stroke="#FFD34E" strokeWidth="2" strokeOpacity="0.5" />
+      <path d="M85 48 C100 28 126 32 110 50 C126 46 120 30 85 48Z" fill="#FFD34E" fillOpacity="0.2" stroke="#FFD34E" strokeWidth="2" strokeOpacity="0.5" />
     </svg>
   );
 }
 
-function MangoFruit({ className }: { className?: string }) {
+// Makroud — a date-filled lozenge with criss-cross marks.
+function Makroud({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 130 180" className={className} fill="none">
-      <path d="M65 10 C96 10 118 42 118 78 C118 120 96 165 65 172 C34 165 12 120 12 78 C12 42 34 10 65 10Z"
-        fill="#FFD34E" fillOpacity="0.14" stroke="#FFD34E" strokeWidth="2.5" strokeOpacity="0.5"/>
-      <path d="M65 10 C77 36 80 70 72 106 C66 132 60 155 65 172"
-        stroke="#FFD34E" strokeWidth="1.5" strokeOpacity="0.35"/>
-      <path d="M36 38 C52 48 72 46 96 40" stroke="#FFD34E" strokeWidth="1.5" strokeOpacity="0.3"/>
-      <path d="M22 78 C40 84 80 84 108 78"  stroke="#FFD34E" strokeWidth="1.5" strokeOpacity="0.3"/>
-      <path d="M26 116 C44 120 82 120 104 116" stroke="#FFD34E" strokeWidth="1.5" strokeOpacity="0.3"/>
-      <path d="M65 4 Q76 -6 84 4" stroke="#7ED95A" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.6"/>
+    <svg viewBox="0 0 160 110" className={className} fill="none">
+      <path d="M30 78 L60 30 L130 30 L100 78 Z" fill="#9A5A2C" fillOpacity="0.15" stroke="#9A5A2C" strokeWidth="2.6" strokeOpacity="0.5" />
+      <path d="M48 54 L118 54" stroke="#9A5A2C" strokeWidth="1.5" strokeOpacity="0.35" />
+      <path d="M70 30 L52 78 M92 30 L74 78 M114 30 L96 78" stroke="#9A5A2C" strokeWidth="1.4" strokeOpacity="0.3" />
     </svg>
   );
 }
 
-function MintSprig({ className }: { className?: string }) {
+// Pistachio sprig — leaves garnish.
+function PistachioSprig({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 100 130" className={className} fill="none">
-      <path d="M50 125 L50 20" stroke="#7ED95A" strokeWidth="2.5" strokeOpacity="0.5" strokeLinecap="round"/>
-      <path d="M50 95  C35 88 20 70 22 52 C38 56 52 68 50 95Z"  fill="#7ED95A" fillOpacity="0.18" stroke="#7ED95A" strokeWidth="1.8" strokeOpacity="0.45"/>
-      <path d="M50 95  C38 88 22 70 20 52 C20 52 38 56 50 95Z"  fill="none"/>
-      <path d="M50 65  C65 58 80 40 78 22 C62 26 48 38 50 65Z"  fill="#7ED95A" fillOpacity="0.18" stroke="#7ED95A" strokeWidth="1.8" strokeOpacity="0.45"/>
-      <path d="M50 40  C38 32 24 18 28 4 C42 8 54 20 50 40Z"   fill="#7ED95A" fillOpacity="0.15" stroke="#7ED95A" strokeWidth="1.8" strokeOpacity="0.4"/>
+      <path d="M50 125 L50 20" stroke="#7ED95A" strokeWidth="2.5" strokeOpacity="0.5" strokeLinecap="round" />
+      <path d="M50 95  C35 88 20 70 22 52 C38 56 52 68 50 95Z" fill="#7ED95A" fillOpacity="0.18" stroke="#7ED95A" strokeWidth="1.8" strokeOpacity="0.45" />
+      <path d="M50 65  C65 58 80 40 78 22 C62 26 48 38 50 65Z" fill="#7ED95A" fillOpacity="0.18" stroke="#7ED95A" strokeWidth="1.8" strokeOpacity="0.45" />
+      <path d="M50 40  C38 32 24 18 28 4 C42 8 54 20 50 40Z"  fill="#7ED95A" fillOpacity="0.15" stroke="#7ED95A" strokeWidth="1.8" strokeOpacity="0.4" />
     </svg>
   );
 }
 
 // Float animation helper
-function FloatingFruit({ children, delay = 0, duration = 6, rotateAmt = 8, className = '' }: {
+function FloatingItem({ children, delay = 0, duration = 6, rotateAmt = 8, className = '' }: {
   children: React.ReactNode; delay?: number; duration?: number; rotateAmt?: number; className?: string;
 }) {
   return (
@@ -120,13 +121,13 @@ export default function HeroSection() {
   return (
     <section
       className="relative min-h-screen w-full overflow-hidden flex items-center"
-      style={{ background: 'linear-gradient(145deg, #FFFBF5 0%, #FFF3DC 40%, #F5FFFB 100%)' }}
+      style={{ background: 'linear-gradient(145deg, #FFFBF5 0%, #F1ECFF 45%, #FAF7FF 100%)' }}
     >
       {/* Ambient light blobs — pure CSS, no filter */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-coral/8 rounded-full blur-[90px]" />
         <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-sunny/10 rounded-full blur-[70px]" />
-        <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-teal/8  rounded-full blur-[60px]" />
+        <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-lilac/20 rounded-full blur-[60px]" />
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-8 items-center min-h-screen pt-28 pb-16 lg:py-36">
@@ -177,7 +178,7 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.div variants={itemVariants} className="flex items-center gap-7 pt-4 border-t border-warm/10">
-            {[{ value: '24+', label: 'Recettes' }, { value: '3', label: 'Formats' }, { value: '100%', label: 'Naturel' }].map(s => (
+            {[{ value: '50+', label: 'Pâtisseries' }, { value: '3', label: 'Tailles' }, { value: '1969', label: 'À Sfax' }].map(s => (
               <div key={s.label} className="flex flex-col">
                 <span className="font-playfair text-2xl font-bold text-warm">{s.value}</span>
                 <span className="text-warm/35 text-xs uppercase tracking-widest">{s.label}</span>
@@ -185,68 +186,68 @@ export default function HeroSection() {
             ))}
           </motion.div>
 
-          {/* ── Mobile fruit row — visible only below lg ── */}
+          {/* ── Mobile pâtisserie row — visible only below lg ── */}
           <motion.div
             variants={itemVariants}
             className="lg:hidden flex justify-center items-end gap-6 pt-6"
           >
-            <FloatingFruit delay={0} duration={7} rotateAmt={6}>
-              <OrangeSlice className="w-28 h-28" />
-            </FloatingFruit>
-            <FloatingFruit delay={0.6} duration={9} rotateAmt={10} className="-mb-4">
-              <MangoFruit className="w-20 h-28" />
-            </FloatingFruit>
-            <FloatingFruit delay={1.2} duration={6.5} rotateAmt={8}>
-              <LemonSlice className="w-28 h-20" />
-            </FloatingFruit>
-            <FloatingFruit delay={1.8} duration={8} rotateAmt={12} className="hidden min-[420px]:block -mb-2">
-              <StrawberryFruit className="w-20 h-24" />
-            </FloatingFruit>
+            <FloatingItem delay={0} duration={7} rotateAmt={6}>
+              <MonogramMedallion className="w-28 h-28" />
+            </FloatingItem>
+            <FloatingItem delay={0.6} duration={9} rotateAmt={10} className="-mb-4">
+              <GiftBox className="w-24 h-24" />
+            </FloatingItem>
+            <FloatingItem delay={1.2} duration={6.5} rotateAmt={8}>
+              <BaklawaDiamond className="w-24 h-24" />
+            </FloatingItem>
+            <FloatingItem delay={1.8} duration={8} rotateAmt={12} className="hidden min-[420px]:block -mb-2">
+              <Makroud className="w-24 h-16" />
+            </FloatingItem>
           </motion.div>
 
         </motion.div>
 
-        {/* ── Right: floating fruit scene (desktop only) ── */}
+        {/* ── Right: floating pâtisserie scene (desktop only) ── */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.4 }}
           className="hidden lg:block relative h-[560px]"
         >
-          {/* Main orange — center */}
-          <FloatingFruit delay={0} duration={7} rotateAmt={6} className="absolute top-[8%] left-[15%]">
-            <OrangeSlice className="w-64 h-64" />
-          </FloatingFruit>
+          {/* Monogram medallion — center */}
+          <FloatingItem delay={0} duration={7} rotateAmt={5} className="absolute top-[8%] left-[15%]">
+            <MonogramMedallion className="w-64 h-64" />
+          </FloatingItem>
 
-          {/* Mango — right */}
-          <FloatingFruit delay={1.2} duration={8} rotateAmt={10} className="absolute top-[5%] right-[5%]">
-            <MangoFruit className="w-40 h-52" />
-          </FloatingFruit>
+          {/* Gift box — right */}
+          <FloatingItem delay={1.2} duration={8} rotateAmt={9} className="absolute top-[5%] right-[5%]">
+            <GiftBox className="w-44 h-44" />
+          </FloatingItem>
 
-          {/* Lemon — bottom left */}
-          <FloatingFruit delay={0.6} duration={6.5} rotateAmt={8} className="absolute bottom-[12%] left-[5%]">
-            <LemonSlice className="w-48 h-36" />
-          </FloatingFruit>
+          {/* Baklawa — bottom left */}
+          <FloatingItem delay={0.6} duration={6.5} rotateAmt={8} className="absolute bottom-[12%] left-[5%]">
+            <BaklawaDiamond className="w-44 h-44" />
+          </FloatingItem>
 
-          {/* Strawberry — top right */}
-          <FloatingFruit delay={1.8} duration={5.5} rotateAmt={12} className="absolute top-[2%] right-[30%]">
-            <StrawberryFruit className="w-24 h-28" />
-          </FloatingFruit>
+          {/* Makroud — top right */}
+          <FloatingItem delay={1.8} duration={5.5} rotateAmt={12} className="absolute top-[2%] right-[32%]">
+            <Makroud className="w-28 h-20" />
+          </FloatingItem>
 
-          {/* Mint — bottom right */}
-          <FloatingFruit delay={0.9} duration={9} rotateAmt={7} className="absolute bottom-[8%] right-[8%]">
-            <MintSprig className="w-20 h-28" />
-          </FloatingFruit>
+          {/* Pistachio sprig — bottom right */}
+          <FloatingItem delay={0.9} duration={9} rotateAmt={7} className="absolute bottom-[8%] right-[8%]">
+            <PistachioSprig className="w-20 h-28" />
+          </FloatingItem>
 
-          {/* Small orange — center right */}
-          <FloatingFruit delay={2.2} duration={6} rotateAmt={15} className="absolute top-[45%] right-[18%]">
-            <OrangeSlice className="w-20 h-20 opacity-70" />
-          </FloatingFruit>
+          {/* Small baklawa — center right */}
+          <FloatingItem delay={2.2} duration={6} rotateAmt={15} className="absolute top-[46%] right-[18%]">
+            <BaklawaDiamond className="w-20 h-20 opacity-70" />
+          </FloatingItem>
 
-          {/* Tiny lemon — upper center */}
-          <FloatingFruit delay={1.5} duration={7.5} rotateAmt={20} className="absolute top-[30%] left-[48%]">
-            <LemonSlice className="w-24 h-18 opacity-60" />
-          </FloatingFruit>
+          {/* Small makroud — upper center */}
+          <FloatingItem delay={1.5} duration={7.5} rotateAmt={18} className="absolute top-[30%] left-[48%]">
+            <Makroud className="w-24 h-16 opacity-60" />
+          </FloatingItem>
         </motion.div>
 
       </div>

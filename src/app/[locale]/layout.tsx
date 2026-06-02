@@ -26,13 +26,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'AIT Juice — L\'Art du Jus Frais',
-  description: 'Premium artisanal juice store. Every glass is a masterpiece.',
-  applicationName: 'AIT Juice',
+  title: 'Masmoudi — Pâtisserie d\'Exception',
+  description: 'Pâtisserie tunisienne d\'exception depuis 1969. Baklawa, makroud, mlabes — composez votre coffret, livré partout en Tunisie.',
+  applicationName: 'Masmoudi',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'AIT Juice',
+    title: 'Masmoudi',
   },
   formatDetection: { telephone: false },
   icons: {
@@ -44,14 +44,14 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   openGraph: {
-    title: 'AIT Juice',
-    description: 'Premium artisanal juice — pressed to order, crafted with passion.',
+    title: 'Masmoudi — Pâtisserie d\'Exception',
+    description: 'La pâtisserie tunisienne d\'exception depuis 1969. Composez votre coffret de baklawa, makroud et mlabes.',
     type: 'website',
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FF5A1F',
+  themeColor: '#6C5CE7',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',

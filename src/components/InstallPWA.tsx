@@ -10,7 +10,7 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
 }
 
-const DISMISS_KEY = 'picasso-pwa-dismissed';
+const DISMISS_KEY = 'masmoudi-pwa-dismissed';
 
 /* ---------- icons ---------- */
 function DownloadIcon() {
@@ -145,8 +145,8 @@ export function InstallPWA() {
   /* let other components (e.g. the navbar) trigger the install flow */
   useEffect(() => {
     const open = () => handleClick();
-    window.addEventListener('picasso:open-install', open);
-    return () => window.removeEventListener('picasso:open-install', open);
+    window.addEventListener('masmoudi:open-install', open);
+    return () => window.removeEventListener('masmoudi:open-install', open);
   }, [handleClick]);
 
   const dismiss = useCallback(() => {

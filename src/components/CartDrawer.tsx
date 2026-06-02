@@ -29,10 +29,6 @@ function fmtPrice(n: number) {
   return n.toFixed(3).replace('.', ',');
 }
 
-function isEligibleForNational(item: CartItem) {
-  return item.format.includes('1L');
-}
-
 function buildWhatsAppMessage(
   items: CartItem[],
   method: Method,
@@ -44,7 +40,7 @@ function buildWhatsAppMessage(
   total: number,
 ) {
   const lines = items.map(i => {
-    const fruits = i.fruits?.length ? ` (${i.fruits.join(' × ')})` : '';
+    const fruits = i.fruits?.length ? ` (${i.fruits.join(' · ')})` : '';
     return `• ${i.qty}x ${i.name}${fruits} — ${fmtPrice(i.price * i.qty)} TND`;
   });
 
@@ -72,7 +68,7 @@ function buildWhatsAppMessage(
   const grandTotal = method === 'pickup' ? total : total + DELIVERY_FEE;
 
   return [
-    'Bonjour AIT Juice! 🎨',
+    'Bonjour Masmoudi! 🍯',
     '',
     contact,
     '',
@@ -82,7 +78,7 @@ function buildWhatsAppMessage(
     '',
     `Total : ${fmtPrice(grandTotal)} TND`,
     '',
-    'Merci ! 🍊',
+    'Merci ! 🌰',
   ].join('\n');
 }
 
@@ -155,7 +151,7 @@ function StepDots({ step }: { step: number }) {
           key={s}
           animate={{
             width:           s === step ? 22 : 7,
-            backgroundColor: s <= step  ? '#FF5A1F' : '#1A0A0015',
+            backgroundColor: s <= step  ? '#6C5CE7' : '#1A0A0015',
           }}
           transition={{ type: 'spring', stiffness: 320, damping: 28 }}
           className="h-1.5 rounded-full"
@@ -219,8 +215,9 @@ export default function CartDrawer() {
 
   // ── Derived ──────────────────────────────────────────────────────────────
 
-  const ineligible    = items.filter(i => !isEligibleForNational(i));
-  const hasIneligible = method === 'national' && ineligible.length > 0;
+  // Pâtisserie ships everywhere — no per-item national-delivery restriction.
+  const ineligible: CartItem[] = [];
+  const hasIneligible = false;
   const belowMin      = method === 'national' && !hasIneligible && totalPrice < NATIONAL_MIN;
   const missingTND    = NATIONAL_MIN - totalPrice;
 
@@ -267,11 +264,11 @@ export default function CartDrawer() {
         {items.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center gap-3 pb-16">
             <div className="w-14 h-14 rounded-full bg-coral/8 flex items-center justify-center text-3xl">
-              🧃
+              🎁
             </div>
             <div>
               <p className="font-playfair text-warm/45 text-base font-medium">Panier vide</p>
-              <p className="text-warm/25 text-xs mt-1">Ajoutez des jus depuis le menu</p>
+              <p className="text-warm/25 text-xs mt-1">Ajoutez des pâtisseries depuis le catalogue</p>
             </div>
           </div>
         ) : (
@@ -291,7 +288,7 @@ export default function CartDrawer() {
                     <p className="text-warm font-semibold text-[13px] truncate leading-tight">{item.name}</p>
                     <p className="text-warm/35 text-[10px] leading-tight mt-0.5">{item.format}</p>
                     {item.fruits && item.fruits.length > 0 && (
-                      <p className="text-warm/25 text-[9px] truncate mt-0.5">{item.fruits.join(' × ')}</p>
+                      <p className="text-warm/25 text-[9px] truncate mt-0.5">{item.fruits.join(' · ')}</p>
                     )}
                   </div>
                   <div className="flex items-center gap-1 flex-shrink-0">
@@ -364,15 +361,15 @@ export default function CartDrawer() {
       sub:     'Tanyour Store · Mall Sfax',
       tag:     'GRATUIT',
       tagBg:   '#22c55e',
-      color:   '#FF5A1F',
-      glow:    '#FF5A1F',
+      color:   '#6C5CE7',
+      glow:    '#6C5CE7',
     },
     {
       id:      'sfax' as Method,
       emoji:   '🛵',
       title:   'Livraison — Sfax',
       desc:    'À domicile · Zone ≤ 10 km',
-      sub:     'Menu complet disponible',
+      sub:     'Toutes nos pâtisseries',
       tag:     '+7,000 TND',
       tagBg:   '#3ECFB0',
       color:   '#18A88A',
@@ -381,8 +378,8 @@ export default function CartDrawer() {
     {
       id:      'national' as Method,
       emoji:   '📦',
-      title:   'Livraison — Hors Sfax',
-      desc:    'Bouteilles 1L · Palettes 1L',
+      title:   'Livraison — Toute la Tunisie',
+      desc:    'Toutes nos pâtisseries, partout',
       sub:     `Min. ${NATIONAL_MIN} TND · Livraison +7 TND`,
       tag:     '+7,000 TND',
       tagBg:   '#E6A800',
@@ -587,14 +584,14 @@ export default function CartDrawer() {
                 onClick={() => setStore(s.id)}
                 className="flex items-center gap-3.5 p-4 rounded-2xl border-2 text-left transition-all duration-200 cursor-pointer"
                 style={{
-                  borderColor: selected ? '#FF5A1F' : '#1A0A0012',
-                  background:  selected ? '#FF5A1F08' : '#ffffff',
-                  boxShadow:   selected ? '0 4px 18px #FF5A1F18' : undefined,
+                  borderColor: selected ? '#6C5CE7' : '#1A0A0012',
+                  background:  selected ? '#6C5CE708' : '#ffffff',
+                  boxShadow:   selected ? '0 4px 18px #6C5CE718' : undefined,
                 }}
               >
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-                  style={{ background: selected ? '#FF5A1F15' : '#1A0A0006' }}
+                  style={{ background: selected ? '#6C5CE715' : '#1A0A0006' }}
                 >
                   {s.emoji}
                 </div>

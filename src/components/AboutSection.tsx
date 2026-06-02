@@ -7,8 +7,8 @@ const SPRING: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const VALUES = [
   {
     title: 'Fraîcheur',
-    desc: 'Chaque jus est pressé à la commande. Aucun jus ne reste plus de 30 minutes avant d\'être servi.',
-    color: '#FF5A1F',
+    desc: 'Chaque pièce est façonnée à la main dans notre atelier de Sfax, fraîche chaque jour.',
+    color: '#6C5CE7',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><path d="M20 2v4h-4"/>
@@ -17,7 +17,7 @@ const VALUES = [
   },
   {
     title: 'Naturalité',
-    desc: 'Aucun additif, aucun conservateur. Uniquement des fruits frais sélectionnés chaque matin sur le marché.',
+    desc: 'Pistache d\'Alep, amandes, miel pur — uniquement des ingrédients nobles, sans artifice.',
     color: '#7ED95A',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -26,8 +26,8 @@ const VALUES = [
     ),
   },
   {
-    title: 'Créativité',
-    desc: 'Nos recettes sont pensées pour surprendre. De l\'Orange Soleil au Tropical Paradise, chaque saveur est une œuvre.',
+    title: 'Tradition',
+    desc: 'De la baklawa au makroud, un savoir-faire artisanal transmis depuis 1969.',
     color: '#FFD34E',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -38,10 +38,10 @@ const VALUES = [
 ];
 
 const STATS = [
-  { value: '2020', label: 'Fondé à Tunis' },
-  { value: '24+',  label: 'Recettes artisanales' },
-  { value: '100%', label: 'Fruits frais' },
-  { value: '∞',    label: 'Créations possibles' },
+  { value: '1969', label: 'Fondé à Sfax' },
+  { value: '50+',  label: 'Pâtisseries' },
+  { value: '100%', label: 'Fait main' },
+  { value: '∞',    label: 'Coffrets possibles' },
 ];
 
 export function AboutSection() {
@@ -61,14 +61,14 @@ export function AboutSection() {
               — Notre Histoire —
             </span>
             <h2 className="font-playfair text-[clamp(2.2rem,5vw,3.8rem)] font-bold text-warm leading-tight mb-6">
-              Né à Tunis,<br />
+              Né à Sfax,<br />
               <span className="italic text-coral">fait avec passion</span>
             </h2>
             <p className="text-warm/60 text-lg leading-relaxed mb-4">
-              AIT Juice est né d&apos;une conviction simple : un bon jus peut transformer une journée ordinaire en moment de bonheur pur.
+              Masmoudi est née en 1969 à Sfax, d&apos;une passion pour la pâtisserie tunisienne d&apos;exception.
             </p>
             <p className="text-warm/55 text-base leading-relaxed">
-              Depuis 2020, nous sélectionnons chaque matin les meilleurs fruits du marché tunisien pour créer des jus qui ont le goût de la fraîcheur absolue. Chaque verre est une œuvre d&apos;art — pressé à la minute, livré avec soin.
+              Depuis, nous perpétuons un savoir-faire artisanal : baklawa au miel, makroud aux dattes, mlabes à la pistache d&apos;Alep. Chaque pièce est une œuvre, façonnée à la main.
             </p>
           </motion.div>
 

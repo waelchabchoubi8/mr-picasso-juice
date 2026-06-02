@@ -76,7 +76,7 @@ export default function Navbar() {
 
   const requestInstall = () => {
     setMobileOpen(false);
-    window.dispatchEvent(new Event('picasso:open-install'));
+    window.dispatchEvent(new Event('masmoudi:open-install'));
   };
 
   useEffect(() => {
@@ -106,11 +106,11 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-coral to-sunny flex items-center justify-center shadow-md shadow-coral/30 group-hover:shadow-coral/50 transition-shadow duration-300">
-            <span className="text-white font-playfair font-bold text-sm">A</span>
+            <span className="text-white font-playfair font-bold text-sm">M</span>
           </div>
           <div className="hidden sm:block">
-            <span className="font-playfair text-warm font-semibold text-sm tracking-wide">AIT</span>
-            <span className="text-warm/35 text-xs ml-1">Juice</span>
+            <span className="font-playfair text-warm font-semibold text-sm tracking-wide">Masmoudi</span>
+            <span className="text-warm/35 text-xs ml-1">Sfax</span>
           </div>
         </Link>
 

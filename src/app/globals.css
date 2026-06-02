@@ -92,7 +92,7 @@ a, button {
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #FFF0D9; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#FF5A1F, #FFD34E);
+  background: linear-gradient(#6C5CE7, #FFD34E);
   border-radius: 9999px;
 }
 

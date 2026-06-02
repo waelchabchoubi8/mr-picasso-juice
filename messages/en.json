@@ -1,17 +1,17 @@
 {
   "nav": {
     "home": "Home",
-    "menu": "Menu",
-    "palette": "Palette",
-    "about": "About",
+    "menu": "Catalogue",
+    "palette": "Box",
+    "about": "Our Story",
     "orderNow": "Order Now",
     "install": "Install app"
   },
   "pwa": {
     "install": "Install app",
-    "tagline": "The AIT Juice app, on your home screen",
+    "tagline": "The Masmoudi app, on your home screen",
     "titleAndroid": "Install the app",
-    "subtitleAndroid": "Add AIT Juice to your home screen and order in a single tap.",
+    "subtitleAndroid": "Add Masmoudi to your home screen and order in a single tap.",
     "installCta": "Install now",
     "titleIOS": "Add to Home Screen",
     "subtitleIOS": "Install the app in 2 steps from Safari:",
@@ -28,23 +28,40 @@
     "benefit3": "Order in a single tap"
   },
   "hero": {
-    "tagline": "The Art of Fresh Juice",
-    "subtitle": "Every glass is a masterpiece — pressed to order, crafted with passion.",
-    "cta": "Explore Menu",
-    "badge": "100% Natural",
-    "createJuice": "Create my juice →"
+    "tagline": "Pâtisserie d'Exception",
+    "subtitle": "Baklawa, makroud, mlabes… Tunisia's finest pastries. Build your own box and savour the tradition.",
+    "cta": "View Catalogue",
+    "badge": "Since 1969 · Sfax",
+    "createJuice": "Build my box →"
   },
   "menu": {
-    "title": "Our Menu",
-    "subtitle": "Freshness & Creativity in every glass"
+    "title": "Our Pastries",
+    "subtitle": "The finest Tunisian pâtisserie, piece by piece"
   },
-  "palette": {
+  "builder": {
     "badge": "Exclusive Concept",
-    "title": "The",
-    "highlight": "AIT Palette",
-    "subtitle": "Pick up to 3 fruits and craft your liquid masterpiece.",
-    "order": "Order this juice",
-    "creationLabel": "Your creation:",
-    "hint": "Select 1 to 3 fruits to build your juice"
+    "title": "Build Your",
+    "highlight": "Box",
+    "subtitle": "Choose the size of your box, then fill it with the pastries you love.",
+    "chooseSize": "1. Choose your size",
+    "fillBox": "2. Fill your box",
+    "hint": "Fill every piece to order your box",
+    "addToCart": "Add to cart",
+    "reset": "Reset",
+    "creationLabel": "Your box:",
+    "emptyHint": "Choose a size to get started",
+    "pieces": "pieces",
+    "remaining": "left",
+    "popular": "Popular",
+    "save": "Save",
+    "from": "from",
+    "total": "Total",
+    "react": {
+      "start": "Choose your box size.",
+      "low": "Nice start!",
+      "mid": "Keep going, looks great…",
+      "high": "Almost perfect! {remaining} to go.",
+      "full": "A beautiful box!"
+    }
   }
 }

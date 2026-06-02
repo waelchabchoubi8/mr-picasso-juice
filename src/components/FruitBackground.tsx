@@ -22,9 +22,9 @@ export function FruitBackground() {
 
       <div className="absolute -top-8 -right-8" style={float('9s','0s',10,5)}>
         <svg viewBox="0 0 160 160" className="w-32 h-32 sm:w-44 sm:h-44 lg:w-56 lg:h-56 opacity-[0.12]" fill="none">
-          <circle cx="80" cy="80" r="72" stroke="#FF5A1F" strokeWidth="3"/>
-          <circle cx="80" cy="80" r="24" stroke="#FF5A1F" strokeWidth="2"/>
-          {BIG_ORANGE.map((l,i)=><line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="#FF5A1F" strokeWidth="1.5"/>)}
+          <circle cx="80" cy="80" r="72" stroke="#6C5CE7" strokeWidth="3"/>
+          <circle cx="80" cy="80" r="24" stroke="#6C5CE7" strokeWidth="2"/>
+          {BIG_ORANGE.map((l,i)=><line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="#6C5CE7" strokeWidth="1.5"/>)}
         </svg>
       </div>
 
@@ -40,9 +40,9 @@ export function FruitBackground() {
 
       <div className="absolute top-1/3 -right-4 rotate-12" style={float('7s','-5s',10,8)}>
         <svg viewBox="0 0 100 120" className="w-16 h-20 sm:w-20 sm:h-26 lg:w-28 lg:h-36 opacity-[0.11]" fill="none">
-          <path d="M50 110 C20 85 8 60 12 38 C16 18 34 10 50 18 C66 10 84 18 88 38 C92 60 80 85 50 110Z" stroke="#FF5A1F" strokeWidth="2"/>
+          <path d="M50 110 C20 85 8 60 12 38 C16 18 34 10 50 18 C66 10 84 18 88 38 C92 60 80 85 50 110Z" stroke="#6C5CE7" strokeWidth="2"/>
           {[[38,45],[55,38],[48,60],[62,58],[38,68],[55,72]].map(([x,y],i)=>(
-            <ellipse key={i} cx={x} cy={y} rx="2.5" ry="3" stroke="#FF5A1F" strokeWidth="1.2"/>
+            <ellipse key={i} cx={x} cy={y} rx="2.5" ry="3" stroke="#6C5CE7" strokeWidth="1.2"/>
           ))}
           <path d="M50 18 C45 5 30 2 28 12" stroke="#7ED95A" strokeWidth="2" strokeLinecap="round"/>
           <path d="M50 18 C52 3 65 0 68 10"  stroke="#7ED95A" strokeWidth="2" strokeLinecap="round"/>
@@ -90,9 +90,9 @@ export function FruitBackground() {
 
       <div className="absolute top-12 left-1/2 rotate-[35deg]" style={float('6s','-1s',13,9)}>
         <svg viewBox="0 0 80 80" className="w-16 h-16 opacity-[0.10]" fill="none">
-          <circle cx="40" cy="40" r="34" stroke="#FF5A1F" strokeWidth="2"/>
-          <circle cx="40" cy="40" r="12" stroke="#FF5A1F" strokeWidth="1.5"/>
-          {TINY_ORANGE.map((l,i)=><line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="#FF5A1F" strokeWidth="1.2"/>)}
+          <circle cx="40" cy="40" r="34" stroke="#6C5CE7" strokeWidth="2"/>
+          <circle cx="40" cy="40" r="12" stroke="#6C5CE7" strokeWidth="1.5"/>
+          {TINY_ORANGE.map((l,i)=><line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="#6C5CE7" strokeWidth="1.2"/>)}
         </svg>
       </div>
 

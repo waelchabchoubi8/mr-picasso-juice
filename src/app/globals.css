@@ -20,6 +20,18 @@ body {
   overflow-x: hidden;
 }
 
+/* ─── Arabic typography + RTL ─── */
+/* Cairo covers Arabic; override both Latin font tokens for the ar locale. */
+html[lang="ar"] body,
+html[lang="ar"] .font-inter,
+html[lang="ar"] .font-playfair {
+  font-family: var(--font-cairo), 'Cairo', 'Segoe UI', sans-serif;
+}
+/* Arabic script is never italicised — keep headings upright. */
+html[lang="ar"] .italic { font-style: normal; }
+/* Slightly looser line-height for Arabic diacritics. */
+html[lang="ar"] { line-height: 1.7; }
+
 /* Hide default cursor on desktop so custom cursor shows */
 @media (pointer: fine) {
   *, *::before, *::after { cursor: none !important; }
@@ -92,7 +104,7 @@ a, button {
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #FFF0D9; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#FF5A1F, #FFD34E);
+  background: linear-gradient(#CE2029, #F2C14E);
   border-radius: 9999px;
 }
 

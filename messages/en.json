@@ -1,17 +1,31 @@
 {
   "nav": {
     "home": "Home",
-    "menu": "Menu",
-    "palette": "Palette",
+    "menu": "Catalogue",
+    "palette": "Box",
     "about": "About",
-    "orderNow": "Order Now",
-    "install": "Install app"
+    "orderNow": "Order",
+    "install": "Install app",
+    "currency": "Currency"
+  },
+  "region": {
+    "welcome": "Welcome to Soltana",
+    "question": "Where are you ordering from?",
+    "subtitle": "Pick your region so we show you the right prices.",
+    "tnLabel": "I'm in Tunisia",
+    "tnDesc": "Prices in Dinar (TND)",
+    "intlLabel": "From abroad",
+    "intlDesc": "Prices in Euro (€)",
+    "aliName": "Ali 5lega Zehya",
+    "aliHi": "Ahla! Welcome 👋",
+    "aliTn": "Great — dinars it is 🇹🇳",
+    "aliIntl": "Welcome! Euro prices 🌍"
   },
   "pwa": {
     "install": "Install app",
-    "tagline": "The Picasso app, on your home screen",
+    "tagline": "The Soltana app, on your home screen",
     "titleAndroid": "Install the app",
-    "subtitleAndroid": "Add Mr. Picasso Juice to your home screen and order in a single tap.",
+    "subtitleAndroid": "Add Soltana Pro Max to your home screen and order in a single tap.",
     "installCta": "Install now",
     "titleIOS": "Add to Home Screen",
     "subtitleIOS": "Install the app in 2 steps from Safari:",
@@ -28,23 +42,42 @@
     "benefit3": "Order in a single tap"
   },
   "hero": {
-    "tagline": "The Art of Fresh Juice",
-    "subtitle": "Every glass is a masterpiece — pressed to order, crafted with passion.",
-    "cta": "Explore Menu",
-    "badge": "100% Natural",
-    "createJuice": "Create my juice →"
+    "tagline": "The Taste of Tradition",
+    "subtitle": "Mloukhiya, kleya, chakchouka… Authentic Tunisian dishes, slow-cooked with care and sealed in tins for you.",
+    "cta": "View Catalogue",
+    "badge": "100% Traditional",
+    "buildBox": "Build my box →",
+    "stat1": "Recipes",
+    "stat2": "Sizes",
+    "stat3": "Homemade"
   },
   "menu": {
-    "title": "Our Menu",
-    "subtitle": "Freshness & Creativity in every glass"
+    "title": "Our Tins",
+    "subtitle": "Traditional Tunisian dishes, ready to enjoy"
   },
-  "palette": {
+  "builder": {
     "badge": "Exclusive Concept",
-    "title": "The",
-    "highlight": "Picasso Palette",
-    "subtitle": "Pick up to 3 fruits and craft your liquid masterpiece.",
-    "order": "Order this juice",
-    "creationLabel": "Your creation:",
-    "hint": "Select 1 to 3 fruits to build your juice"
+    "title": "Build Your",
+    "highlight": "Box",
+    "subtitle": "Pick a size, then fill every tin with your favourite Tunisian dishes.",
+    "chooseSize": "1. Choose your size",
+    "fillBox": "2. Fill your box",
+    "hint": "Fill every tin to order your box",
+    "addToCart": "Add the box",
+    "full": "Box complete!",
+    "reset": "Reset",
+    "creationLabel": "Your box:",
+    "emptyHint": "Choose a size to get started",
+    "cans": "tins",
+    "remaining": "left",
+    "popular": "Popular",
+    "save": "Save",
+    "chef": {
+      "start": "Pick a size, let's pack.",
+      "skeptical": "Hmm. Shall we start?",
+      "warming": ["Good.", "Keep going.", "Not bad at all."],
+      "intoIt": "Almost! {remaining} to go.",
+      "perfect": "There — a real box."
+    }
   }
 }

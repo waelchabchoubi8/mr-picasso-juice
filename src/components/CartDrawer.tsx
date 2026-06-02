@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart, CartItem } from './CartContext';
+import { useCurrency, formatPrice, type CurrencyCode } from './CurrencyContext';
 
 const WHATSAPP_NUMBER = '21600000000';
 const DELIVERY_FEE    = 7;
@@ -17,21 +18,13 @@ const WILAYAS = [
 ];
 
 const STORES = [
-  { id: 'tanyour', name: 'Tanyour Store', address: 'Adresse Tanyour, Sfax', emoji: '🏪' },
-  { id: 'mall',    name: 'Mall Store',    address: 'Mall de Sfax',           emoji: '🏬' },
+  { id: 'tanyour', name: 'Soltana — Tanyour', address: 'Adresse Tanyour, Sfax', emoji: '🏪' },
+  { id: 'mall',    name: 'Soltana — Mall',    address: 'Mall de Sfax',          emoji: '🏬' },
 ];
 
 type Method = 'pickup' | 'sfax' | 'national';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
-
-function fmtPrice(n: number) {
-  return n.toFixed(3).replace('.', ',');
-}
-
-function isEligibleForNational(item: CartItem) {
-  return item.format.includes('1L');
-}
 
 function buildWhatsAppMessage(
   items: CartItem[],
@@ -42,10 +35,13 @@ function buildWhatsAppMessage(
   name: string,
   phone: string,
   total: number,
+  code: CurrencyCode,
 ) {
+  const money = (tnd: number) => formatPrice(tnd, code);
+
   const lines = items.map(i => {
-    const fruits = i.fruits?.length ? ` (${i.fruits.join(' × ')})` : '';
-    return `• ${i.qty}x ${i.name}${fruits} — ${fmtPrice(i.price * i.qty)} TND`;
+    const composition = i.fruits?.length ? ` (${i.fruits.join(' · ')})` : '';
+    return `• ${i.qty}x ${i.name}${composition} — ${money(i.price * i.qty)}`;
   });
 
   const contact = `Commande de ${name || 'Client'}${phone ? ` — ${phone}` : ''}`;
@@ -58,31 +54,36 @@ function buildWhatsAppMessage(
     delivery = [
       `Mode : Livraison Sfax (≤ 10 km)`,
       `Adresse : ${address}`,
-      `Frais de livraison : +${fmtPrice(DELIVERY_FEE)} TND`,
+      `Frais de livraison : +${money(DELIVERY_FEE)}`,
     ];
   } else {
     delivery = [
       `Mode : Livraison Nationale`,
       `Wilaya : ${wilaya}`,
       `Adresse : ${address}`,
-      `Frais de livraison : +${fmtPrice(DELIVERY_FEE)} TND`,
+      `Frais de livraison : +${money(DELIVERY_FEE)}`,
     ];
   }
 
   const grandTotal = method === 'pickup' ? total : total + DELIVERY_FEE;
+  // For international (EUR) orders, keep the TND base visible for the merchant.
+  const totalLine = code === 'EUR'
+    ? `Total : ${money(grandTotal)}  (≈ ${formatPrice(grandTotal, 'TND')})`
+    : `Total : ${money(grandTotal)}`;
 
   return [
-    'Bonjour Mr. Picasso Juice! 🎨',
+    'Bonjour Soltana Pro Max! 🫙',
     '',
     contact,
+    ...(code === 'EUR' ? ['Devise : Euro (€)'] : []),
     '',
     ...delivery,
     '',
     ...lines,
     '',
-    `Total : ${fmtPrice(grandTotal)} TND`,
+    totalLine,
     '',
-    'Merci ! 🍊',
+    'Merci ! 🌶️',
   ].join('\n');
 }
 
@@ -155,7 +156,7 @@ function StepDots({ step }: { step: number }) {
           key={s}
           animate={{
             width:           s === step ? 22 : 7,
-            backgroundColor: s <= step  ? '#FF5A1F' : '#1A0A0015',
+            backgroundColor: s <= step  ? '#CE2029' : '#1A0A0015',
           }}
           transition={{ type: 'spring', stiffness: 320, damping: 28 }}
           className="h-1.5 rounded-full"
@@ -172,6 +173,8 @@ export default function CartDrawer() {
     items, open, totalItems, totalPrice,
     removeItem, setQty, clearCart, closeCart,
   } = useCart();
+  const { amount, symbol, code } = useCurrency();
+  const money = (tnd: number) => `${amount(tnd)} ${symbol}`;
 
   const [step,    setStep]    = useState(1);
   const [method,  setMethod]  = useState<Method | null>(null);
@@ -219,9 +222,10 @@ export default function CartDrawer() {
 
   // ── Derived ──────────────────────────────────────────────────────────────
 
-  const ineligible    = items.filter(i => !isEligibleForNational(i));
-  const hasIneligible = method === 'national' && ineligible.length > 0;
-  const belowMin      = method === 'national' && !hasIneligible && totalPrice < NATIONAL_MIN;
+  // Canned food ships nationwide — every item is eligible for national delivery.
+  const ineligible: CartItem[] = [];
+  const hasIneligible = false;
+  const belowMin      = method === 'national' && totalPrice < NATIONAL_MIN;
   const missingTND    = NATIONAL_MIN - totalPrice;
 
   const deliveryFeeApplies = method === 'sfax' || method === 'national';
@@ -243,7 +247,7 @@ export default function CartDrawer() {
 
   const handleOrder = () => {
     const msg = buildWhatsAppMessage(
-      items, method!, store, address, wilaya, name, phone, totalPrice,
+      items, method!, store, address, wilaya, name, phone, totalPrice, code,
     );
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
     setSent(true);
@@ -267,11 +271,11 @@ export default function CartDrawer() {
         {items.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center gap-3 pb-16">
             <div className="w-14 h-14 rounded-full bg-coral/8 flex items-center justify-center text-3xl">
-              🧃
+              🫙
             </div>
             <div>
               <p className="font-playfair text-warm/45 text-base font-medium">Panier vide</p>
-              <p className="text-warm/25 text-xs mt-1">Ajoutez des jus depuis le menu</p>
+              <p className="text-warm/25 text-xs mt-1">Ajoutez des conserves depuis le catalogue</p>
             </div>
           </div>
         ) : (
@@ -291,7 +295,7 @@ export default function CartDrawer() {
                     <p className="text-warm font-semibold text-[13px] truncate leading-tight">{item.name}</p>
                     <p className="text-warm/35 text-[10px] leading-tight mt-0.5">{item.format}</p>
                     {item.fruits && item.fruits.length > 0 && (
-                      <p className="text-warm/25 text-[9px] truncate mt-0.5">{item.fruits.join(' × ')}</p>
+                      <p className="text-warm/25 text-[9px] truncate mt-0.5">{item.fruits.join(' · ')}</p>
                     )}
                   </div>
                   <div className="flex items-center gap-1 flex-shrink-0">
@@ -312,8 +316,8 @@ export default function CartDrawer() {
                   </div>
                   <div className="flex flex-col items-end gap-1.5 flex-shrink-0 ml-1">
                     <span className="font-playfair font-bold text-warm text-[13px] whitespace-nowrap">
-                      {fmtPrice(item.price * item.qty)}
-                      <span className="text-warm/35 text-[9px] font-normal ml-0.5">TND</span>
+                      {amount(item.price * item.qty)}
+                      <span className="text-warm/35 text-[9px] font-normal ml-0.5">{symbol}</span>
                     </span>
                     <button
                       onClick={() => removeItem(item.id)}
@@ -335,8 +339,8 @@ export default function CartDrawer() {
           <div className="flex items-center justify-between mb-4">
             <span className="text-warm/40 text-sm">Sous-total</span>
             <span className="font-playfair font-bold text-warm text-lg">
-              {fmtPrice(totalPrice)}
-              <span className="text-warm/35 text-sm font-normal ml-1">TND</span>
+              {amount(totalPrice)}
+              <span className="text-warm/35 text-sm font-normal ml-1">{symbol}</span>
             </span>
           </div>
           <motion.button
@@ -364,16 +368,16 @@ export default function CartDrawer() {
       sub:     'Tanyour Store · Mall Sfax',
       tag:     'GRATUIT',
       tagBg:   '#22c55e',
-      color:   '#FF5A1F',
-      glow:    '#FF5A1F',
+      color:   '#CE2029',
+      glow:    '#CE2029',
     },
     {
       id:      'sfax' as Method,
       emoji:   '🛵',
       title:   'Livraison — Sfax',
       desc:    'À domicile · Zone ≤ 10 km',
-      sub:     'Menu complet disponible',
-      tag:     '+7,000 TND',
+      sub:     'Toutes les conserves disponibles',
+      tag:     `+${money(DELIVERY_FEE)}`,
       tagBg:   '#3ECFB0',
       color:   '#18A88A',
       glow:    '#3ECFB0',
@@ -381,10 +385,10 @@ export default function CartDrawer() {
     {
       id:      'national' as Method,
       emoji:   '📦',
-      title:   'Livraison — Hors Sfax',
-      desc:    'Bouteilles 1L · Palettes 1L',
-      sub:     `Min. ${NATIONAL_MIN} TND · Livraison +7 TND`,
-      tag:     '+7,000 TND',
+      title:   'Livraison — Toute la Tunisie',
+      desc:    'Conserves expédiées partout',
+      sub:     `Min. ${money(NATIONAL_MIN)} · Livraison +${money(DELIVERY_FEE)}`,
+      tag:     `+${money(DELIVERY_FEE)}`,
       tagBg:   '#E6A800',
       color:   '#E6A800',
       glow:    '#FFD34E',
@@ -477,7 +481,7 @@ export default function CartDrawer() {
       </div>
 
       <p className="text-warm/35 text-xs text-center leading-relaxed px-2">
-        Seules les <span className="font-semibold text-warm/55">Bouteilles 1L</span> et les <span className="font-semibold text-warm/55">Palettes 1L</span> sont disponibles hors Sfax.
+        Toutes nos conserves sont disponibles partout en Tunisie.
       </p>
 
       <motion.button
@@ -504,11 +508,11 @@ export default function CartDrawer() {
       <div>
         <p className="font-playfair font-bold text-warm text-base mb-1">Minimum requis</p>
         <p className="text-warm/45 text-sm leading-relaxed">
-          La livraison hors Sfax requiert un minimum de{' '}
-          <span className="font-semibold text-warm">{fmtPrice(NATIONAL_MIN)} TND</span> hors livraison.
+          La livraison nationale requiert un minimum de{' '}
+          <span className="font-semibold text-warm">{money(NATIONAL_MIN)}</span> hors livraison.
         </p>
         <p className="text-coral font-semibold text-sm mt-2">
-          Il vous manque {fmtPrice(missingTND)} TND
+          Il vous manque {money(missingTND)}
         </p>
       </div>
       <button
@@ -530,19 +534,19 @@ export default function CartDrawer() {
     <div className="bg-warm/3 border border-warm/8 rounded-xl p-3.5 flex flex-col gap-2">
       <div className="flex items-center justify-between text-xs text-warm/40">
         <span>Articles ({totalItems})</span>
-        <span>{fmtPrice(totalPrice)} TND</span>
+        <span>{money(totalPrice)}</span>
       </div>
       {deliveryFeeApplies && (
         <div className="flex items-center justify-between text-xs text-warm/40">
           <span>Livraison</span>
-          <span>+{fmtPrice(DELIVERY_FEE)} TND</span>
+          <span>+{money(DELIVERY_FEE)}</span>
         </div>
       )}
       <div className="border-t border-warm/10 pt-2 flex items-center justify-between">
         <span className="font-semibold text-warm text-sm">Total</span>
         <span className="font-playfair font-bold text-warm text-base">
-          {fmtPrice(grandTotal)}
-          <span className="text-warm/35 text-xs font-normal ml-1">TND</span>
+          {amount(grandTotal)}
+          <span className="text-warm/35 text-xs font-normal ml-1">{symbol}</span>
         </span>
       </div>
     </div>
@@ -587,14 +591,14 @@ export default function CartDrawer() {
                 onClick={() => setStore(s.id)}
                 className="flex items-center gap-3.5 p-4 rounded-2xl border-2 text-left transition-all duration-200 cursor-pointer"
                 style={{
-                  borderColor: selected ? '#FF5A1F' : '#1A0A0012',
-                  background:  selected ? '#FF5A1F08' : '#ffffff',
-                  boxShadow:   selected ? '0 4px 18px #FF5A1F18' : undefined,
+                  borderColor: selected ? '#CE2029' : '#1A0A0012',
+                  background:  selected ? '#CE202908' : '#ffffff',
+                  boxShadow:   selected ? '0 4px 18px #CE202918' : undefined,
                 }}
               >
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-                  style={{ background: selected ? '#FF5A1F15' : '#1A0A0006' }}
+                  style={{ background: selected ? '#CE202915' : '#1A0A0006' }}
                 >
                   {s.emoji}
                 </div>
@@ -634,7 +638,7 @@ export default function CartDrawer() {
           <span className="text-xl">🛵</span>
           <div>
             <p className="text-[#18A88A] font-semibold text-xs">Zone de livraison</p>
-            <p className="text-warm/40 text-[11px]">≤ 10 km du centre de Sfax · Frais : 7,000 TND</p>
+            <p className="text-warm/40 text-[11px]">≤ 10 km du centre de Sfax · Frais : {money(DELIVERY_FEE)}</p>
           </div>
         </div>
 
@@ -661,7 +665,7 @@ export default function CartDrawer() {
     if (items.length === 0) return (
       <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-5">
         <p className="font-playfair text-warm/40 text-base">Panier vide</p>
-        <p className="text-warm/25 text-xs">Ajoutez des Bouteilles 1L ou Palettes 1L</p>
+        <p className="text-warm/25 text-xs">Ajoutez des conserves à votre panier</p>
         <button onClick={() => goTo(2)} className="text-coral text-sm cursor-pointer">← Changer de méthode</button>
       </div>
     );
@@ -675,7 +679,7 @@ export default function CartDrawer() {
             <span className="text-xl">📦</span>
             <div>
               <p className="text-[#B8860B] font-semibold text-xs">Livraison Nationale</p>
-              <p className="text-warm/40 text-[11px]">Bouteilles 1L · Palettes 1L · Min. {fmtPrice(NATIONAL_MIN)} TND</p>
+              <p className="text-warm/40 text-[11px]">Partout en Tunisie · Min. {money(NATIONAL_MIN)}</p>
             </div>
           </div>
 

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Replace with your real WhatsApp number (country code + number, no +)
 const PHONE = '21600000000';
-const MSG   = encodeURIComponent('Bonjour Mr. Picasso Juice 🍊 Je souhaite passer une commande.');
+const MSG   = encodeURIComponent('Bonjour Soltana Pro Max 🫙 Je souhaite passer une commande.');
 
 export function WhatsAppButton() {
   const [footerVisible, setFooterVisible] = useState(false);

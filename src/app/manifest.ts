@@ -2,15 +2,15 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Mr. Picasso Juice — L\'Art du Jus Frais',
-    short_name: 'Picasso Juice',
-    description: 'Jus artisanaux pressés à la commande. Réservez, commandez et faites-vous livrer à Sfax.',
+    name: 'Soltana Pro Max — La Tradition en Conserve',
+    short_name: 'Soltana',
+    description: 'Plats tunisiens traditionnels en conserve : mloukhiya, chakchouka, ojja… Composez votre coffret et faites-vous livrer partout en Tunisie.',
     start_url: '/fr',
     scope: '/',
     display: 'standalone',
     orientation: 'portrait',
     background_color: '#FFFBF5',
-    theme_color: '#FF5A1F',
+    theme_color: '#CE2029',
     lang: 'fr',
     categories: ['food', 'shopping', 'lifestyle'],
     icons: [

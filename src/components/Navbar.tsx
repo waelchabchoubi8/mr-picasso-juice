@@ -5,6 +5,7 @@ import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motio
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter, usePathname, Link } from '@/navigation';
 import { useCart } from './CartContext';
+import { useCurrency, type Region } from './CurrencyContext';
 
 function CartIcon() {
   return (
@@ -60,6 +61,7 @@ export default function Navbar() {
   const router = useRouter();
   const path   = usePathname();
   const { totalItems, openCart } = useCart();
+  const { region, setRegion } = useCurrency();
   const [scrolled,    setScrolled]    = useState(false);
   const [mobileOpen,  setMobileOpen]  = useState(false);
   const [mounted,     setMounted]     = useState(false);
@@ -85,8 +87,16 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  const toggleLocale = () =>
-    router.push(path, { locale: locale === 'fr' ? 'en' : 'fr' });
+  const LOCALES = [
+    { code: 'fr', label: 'FR' },
+    { code: 'en', label: 'EN' },
+    { code: 'ar', label: 'ع' },
+  ] as const;
+
+  const CURRENCIES: { region: Region; label: string }[] = [
+    { region: 'tn',   label: 'TND' },
+    { region: 'intl', label: '€'   },
+  ];
 
   return (
     <motion.header
@@ -105,12 +115,17 @@ export default function Navbar() {
       `}>
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-coral to-sunny flex items-center justify-center shadow-md shadow-coral/30 group-hover:shadow-coral/50 transition-shadow duration-300">
-            <span className="text-white font-playfair font-bold text-sm">P</span>
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.png"
+            alt="Soltana Pro Max"
+            width={36}
+            height={36}
+            className="w-9 h-9 rounded-full object-cover shadow-md shadow-coral/30 group-hover:shadow-coral/50 transition-shadow duration-300"
+          />
           <div className="hidden sm:block">
-            <span className="font-playfair text-warm font-semibold text-sm tracking-wide">Mr. Picasso</span>
-            <span className="text-warm/35 text-xs ml-1">Juice</span>
+            <span className="font-playfair text-warm font-semibold text-sm tracking-wide">Soltana</span>
+            <span className="text-warm/35 text-xs ml-1">Pro Max</span>
           </div>
         </Link>
 
@@ -130,25 +145,41 @@ export default function Navbar() {
 
         {/* Right: language + CTA */}
         <div className="flex items-center gap-2.5 sm:gap-3">
-          {/* Language toggle */}
-          <button
-            onClick={toggleLocale}
-            aria-label={`Switch to ${locale === 'fr' ? 'English' : 'Français'}`}
-            className="flex items-center bg-warm/[0.05] hover:bg-warm/[0.1] border border-warm/10 rounded-full p-0.5 transition-all duration-200 cursor-pointer"
-          >
-            {(['fr', 'en'] as const).map((lang) => (
-              <span
-                key={lang}
-                className={`px-2.5 py-1 text-xs font-semibold rounded-full transition-all duration-250 ${
-                  locale === lang
+          {/* Currency switcher (desktop) */}
+          <div className="hidden md:flex items-center bg-warm/[0.05] border border-warm/10 rounded-full p-0.5">
+            {CURRENCIES.map((c) => (
+              <button
+                key={c.region}
+                onClick={() => setRegion(c.region)}
+                aria-label={`Prices in ${c.label}`}
+                className={`px-2.5 py-1 text-xs font-semibold rounded-full transition-all duration-250 cursor-pointer ${
+                  region === c.region
                     ? 'bg-coral text-white shadow-sm shadow-coral/40'
                     : 'text-warm/45 hover:text-warm/80'
                 }`}
               >
-                {lang.toUpperCase()}
-              </span>
+                {c.label}
+              </button>
             ))}
-          </button>
+          </div>
+
+          {/* Language switcher */}
+          <div className="flex items-center bg-warm/[0.05] border border-warm/10 rounded-full p-0.5">
+            {LOCALES.map((l) => (
+              <button
+                key={l.code}
+                onClick={() => router.push(path, { locale: l.code })}
+                aria-label={`Switch language to ${l.code}`}
+                className={`px-2 sm:px-2.5 py-1 text-xs font-semibold rounded-full transition-all duration-250 cursor-pointer ${
+                  locale === l.code
+                    ? 'bg-coral text-white shadow-sm shadow-coral/40'
+                    : 'text-warm/45 hover:text-warm/80'
+                }`}
+              >
+                {l.label}
+              </button>
+            ))}
+          </div>
 
           {/* Cart icon button */}
           <button
@@ -217,12 +248,35 @@ export default function Navbar() {
               </motion.a>
             ))}
 
+            {/* Currency (mobile) */}
+            <motion.div
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: NAV_LINKS.length * 0.05, duration: 0.2 }}
+              className="flex items-center justify-between py-2 px-4 mt-1"
+            >
+              <span className="text-warm/55 text-sm font-medium">{t('currency')}</span>
+              <div className="flex items-center bg-warm/[0.05] border border-warm/10 rounded-full p-0.5">
+                {CURRENCIES.map((c) => (
+                  <button
+                    key={c.region}
+                    onClick={() => setRegion(c.region)}
+                    className={`px-3 py-1 text-sm font-semibold rounded-full transition-all cursor-pointer ${
+                      region === c.region ? 'bg-coral text-white shadow-sm shadow-coral/40' : 'text-warm/45'
+                    }`}
+                  >
+                    {c.label}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+
             {canInstall && (
               <motion.button
                 onClick={requestInstall}
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: NAV_LINKS.length * 0.05, duration: 0.2 }}
+                transition={{ delay: (NAV_LINKS.length + 1) * 0.05, duration: 0.2 }}
                 className="mt-1 flex items-center justify-center gap-2 bg-gradient-to-r from-coral to-sunny text-white text-base font-semibold py-3 px-4 rounded-xl shadow-md shadow-coral/25 cursor-pointer"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

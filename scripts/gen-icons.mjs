@@ -55,40 +55,29 @@ function encodePNG(width, height, rgba) {
 // ---- geometry helpers (normalized 0..1 coords) ----
 const lerp = (a, b, t) => a + (b - a) * t;
 function mixColor(t) {
-  // coral #FF5A1F -> sunny #FFD34E
+  // red #CE2029 -> gold #FFD34E
   return [
-    Math.round(lerp(255, 255, t)),
-    Math.round(lerp(90, 211, t)),
-    Math.round(lerp(31, 78, t)),
+    Math.round(lerp(206, 255, t)),
+    Math.round(lerp(32, 211, t)),
+    Math.round(lerp(41, 78, t)),
   ];
 }
-function inCup(x, y) {
-  // trapezoid body
-  if (y < 0.34 || y > 0.76) return false;
-  const tt = (y - 0.34) / (0.42);
-  const left = 0.31 + 0.075 * tt;
-  const right = 0.69 - 0.075 * tt;
-  return x >= left && x <= right;
+function inCanBody(x, y) {
+  return x >= 0.29 && x <= 0.71 && y >= 0.24 && y <= 0.81;
 }
-function inRim(x, y) {
-  // elliptical rim cap at top of cup
-  const cx = 0.5, cy = 0.34, rx = 0.19, ry = 0.045;
+function inLid(x, y) {
+  // domed lid ellipse sitting on top of the cylinder
+  const cx = 0.5, cy = 0.24, rx = 0.21, ry = 0.05;
   const dx = (x - cx) / rx, dy = (y - cy) / ry;
   return dx * dx + dy * dy <= 1;
 }
-function inStraw(x, y) {
-  // thin rotated rect (the straw) poking out top-right
-  const pivotX = 0.56, pivotY = 0.30;
-  const ang = -0.45; // radians
-  const dx = x - pivotX, dy = y - pivotY;
-  const lx = dx * Math.cos(ang) - dy * Math.sin(ang);
-  const ly = dx * Math.sin(ang) + dy * Math.cos(ang);
-  const halfW = 0.028;
-  return Math.abs(lx) <= halfW && ly >= -0.20 && ly <= 0.16;
+function inStripe(x, y) {
+  // two horizontal ribs where the gradient shows through (not white)
+  return inCanBody(x, y) && ((y >= 0.40 && y <= 0.435) || (y >= 0.63 && y <= 0.665));
 }
-// white shape = cup body OR rim OR straw
+// white shape = can lid OR (can body minus the rib stripes)
 function inShape(x, y) {
-  return inCup(x, y) || inRim(x, y) || inStraw(x, y);
+  return inLid(x, y) || (inCanBody(x, y) && !inStripe(x, y));
 }
 
 function render(size, { pad = 0 } = {}) {

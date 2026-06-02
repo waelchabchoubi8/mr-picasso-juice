@@ -1,7 +1,7 @@
-// Mr. Picasso Juice — service worker
+// Soltana Pro Max — service worker
 // Strategy: network-first for navigations (fresh content when online,
 // cached shell when offline), cache-first for static assets.
-const CACHE = 'picasso-v1';
+const CACHE = 'soltana-v1';
 const OFFLINE_URLS = ['/fr', '/en', '/icon.svg', '/icon-192.png', '/manifest.webmanifest'];
 
 self.addEventListener('install', (event) => {

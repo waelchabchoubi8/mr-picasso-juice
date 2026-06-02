@@ -4,65 +4,29 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useCart } from './CartContext';
+import { useCurrency } from './CurrencyContext';
 
-// ─── Format icons ────────────────────────────────────────────────────────────
+// ─── Tin / jar illustration (coloured by the dish inside) ──────────────────────
 
-function BottleIcon({ color, juiceColor }: { color: string; juiceColor: string }) {
+function TinCanIcon({ accent, food }: { accent: string; food: string }) {
+  const clip = `tin-${accent.replace('#', '')}-${food.replace('#', '')}`;
   return (
-    <svg viewBox="0 0 80 160" className="w-full h-full" fill="none">
-      {/* Neck */}
-      <rect x="28" y="6"  width="24" height="34" rx="6" fill={`${color}22`} stroke={color} strokeWidth="2" />
-      {/* Cap */}
-      <rect x="30" y="2"  width="20" height="10" rx="4" fill={color} />
-      {/* Body */}
-      <path d="M14 44 C14 40 26 38 28 38 L28 38 L52 38 C54 38 66 40 66 44 L66 146 C66 152 60 156 40 156 C20 156 14 152 14 146 Z" fill={`${juiceColor}18`} stroke={color} strokeWidth="2" />
-      {/* Liquid fill */}
-      <clipPath id={`bc-${color.replace('#','')}`}>
-        <path d="M15 44 C15 41 27 39 28 39 L52 39 C53 39 65 41 65 44 L65 146 C65 151 59 155 40 155 C21 155 15 151 15 146 Z" />
+    <svg viewBox="0 0 80 96" className="w-full h-full" fill="none">
+      {/* body outline */}
+      <path d="M16 22 L16 80 C16 88 24 92 40 92 C56 92 64 88 64 80 L64 22 Z"
+        fill="white" fillOpacity="0.3" stroke={accent} strokeWidth="2" />
+      {/* content fill */}
+      <clipPath id={clip}>
+        <path d="M16 22 L16 80 C16 88 24 92 40 92 C56 92 64 88 64 80 L64 22 Z" />
       </clipPath>
-      <rect x="14" y="70" width="52" height="86" fill={juiceColor} clipPath={`url(#bc-${color.replace('#','')})`} opacity="0.85" />
-      {/* Shine */}
-      <rect x="22" y="55" width="6" height="60" rx="3" fill="white" opacity="0.3" />
-      {/* Label band */}
-      <rect x="18" y="90" width="44" height="30" rx="4" fill="white" opacity="0.25" />
-    </svg>
-  );
-}
-
-function GrandCupIcon({ color, juiceColor }: { color: string; juiceColor: string }) {
-  return (
-    <svg viewBox="0 0 80 90" className="w-full h-full" fill="none">
-      {/* Cup body */}
-      <path d="M12 10 L16 80 C16 84 20 86 40 86 C60 86 64 84 64 80 L68 10 Z" fill={`${juiceColor}18`} stroke={color} strokeWidth="2" />
-      {/* Liquid */}
-      <clipPath id={`gc-${color.replace('#','')}`}>
-        <path d="M13 10 L17 80 C17 83 21 85 40 85 C59 85 63 83 63 80 L67 10 Z" />
-      </clipPath>
-      <rect x="12" y="32" width="56" height="54" fill={juiceColor} clipPath={`url(#gc-${color.replace('#','')})`} opacity="0.85" />
-      {/* Lid */}
-      <ellipse cx="40" cy="10" rx="28" ry="5" fill={color} />
-      {/* Straw */}
-      <rect x="50" y="-2" width="5" height="50" rx="2.5" fill={color} transform="rotate(6,52,24)" />
-      {/* Shine */}
-      <rect x="19" y="18" width="5" height="40" rx="2.5" fill="white" opacity="0.3" />
-    </svg>
-  );
-}
-
-function PetitCupIcon({ color, juiceColor }: { color: string; juiceColor: string }) {
-  return (
-    <svg viewBox="0 0 70 70" className="w-full h-full" fill="none">
-      {/* Cup */}
-      <path d="M14 12 L18 58 C18 62 22 64 35 64 C48 64 52 62 52 58 L56 12 Z" fill={`${juiceColor}18`} stroke={color} strokeWidth="2" />
-      {/* Liquid */}
-      <clipPath id={`pc-${color.replace('#','')}`}>
-        <path d="M15 12 L19 58 C19 61 23 63 35 63 C47 63 51 61 51 58 L55 12 Z" />
-      </clipPath>
-      <rect x="14" y="30" width="42" height="34" fill={juiceColor} clipPath={`url(#pc-${color.replace('#','')})`} opacity="0.85" />
-      {/* Lid */}
-      <ellipse cx="35" cy="12" rx="21" ry="4" fill={color} />
-      {/* Straw */}
-      <rect x="40" y="2" width="4" height="36" rx="2" fill={color} transform="rotate(5,42,20)" />
+      <rect x="16" y="40" width="48" height="52" fill={food} opacity="0.85" clipPath={`url(#${clip})`} />
+      {/* lid */}
+      <ellipse cx="40" cy="22" rx="24" ry="7" fill={accent} />
+      <ellipse cx="40" cy="22" rx="18" ry="4" fill="white" opacity="0.25" />
+      {/* label band */}
+      <rect x="20" y="52" width="40" height="22" rx="3" fill="white" opacity="0.3" />
+      {/* shine */}
+      <rect x="24" y="34" width="4" height="44" rx="2" fill="white" opacity="0.28" />
     </svg>
   );
 }
@@ -71,51 +35,50 @@ function PetitCupIcon({ color, juiceColor }: { color: string; juiceColor: string
 
 const CATALOGUE = [
   {
-    id:         'bouteille' as const,
-    label:      'Bouteille',
-    sub:        '1 Litre',
-    color:      '#FF5A1F',
-    juiceColor: '#FF7A45',
-    bg:         '#FFF2ED',
-    border:     '#FF5A1F33',
+    id:     'mijotes' as const,
+    label:  'Plats Mijotés',
+    sub:    'Conserves',
+    color:  '#CE2029',
+    bg:     '#FFF2ED',
+    border: '#CE202933',
     items: [
-      { name: 'Orange Soleil',     desc: '100 % oranges fraîchement pressées',     price: '12.000' },
-      { name: 'Tropical Paradise', desc: 'Ananas, mangue, citron vert, gingembre', price: '13.500' },
-      { name: 'Green Boost',       desc: 'Pomme verte, épinard, concombre, citron', price: '14.000' },
-      { name: 'Sunrise Blend',     desc: 'Mangue, maracuja, orange sanguine',      price: '13.500' },
+      { name: 'Mloukhiya',     desc: 'Feuilles de corète mijotées au bœuf, huile d\'olive', price: '9.500',  food: '#2E5E3A', size: '800 g' },
+      { name: 'Kleya',         desc: 'Foie et cœur sautés aux poivrons et épices',          price: '10.000', food: '#7A3B28', size: '600 g' },
+      { name: 'Marqa Hloua',   desc: 'Ragoût sucré-salé aux coings et viande tendre',       price: '9.000',  food: '#A33B26', size: '800 g' },
+      { name: 'Ojja Merguez',  desc: 'Tomates, poivrons, œufs et merguez épicée',           price: '8.500',  food: '#E2542E', size: '600 g' },
     ],
   },
   {
-    id:         'grand' as const,
-    label:      'Grand Cup',
-    sub:        '500 ml',
-    color:      '#E6A800',
-    juiceColor: '#FFD34E',
-    bg:         '#FFFBEC',
-    border:     '#FFD34E55',
+    id:     'legumes' as const,
+    label:  'Légumes & Tartinables',
+    sub:    'Bocaux',
+    color:  '#18A88A',
+    bg:     '#F0FDFB',
+    border: '#3ECFB044',
     items: [
-      { name: 'Sunrise Mango',  desc: 'Mangue, orange, curcuma doré',             price: '7.500' },
-      { name: 'Berry Blast',    desc: 'Fraise, framboise, betterave, pomme',       price: '7.500' },
-      { name: 'Citrus Storm',   desc: 'Orange sanguine, pamplemousse, basilic',    price: '7.000' },
-      { name: 'Tropic Thunder', desc: 'Ananas, citron vert, menthe fraîche',       price: '7.500' },
+      { name: 'Chakchouka',      desc: 'Poivrons, tomates et oignons confits doucement', price: '7.000', food: '#D9482B', size: '350 g' },
+      { name: 'Slata Méchouia',  desc: 'Légumes grillés, ail et huile d\'olive',          price: '7.500', food: '#6E8B3D', size: '350 g' },
+      { name: 'Kafteji',         desc: 'Légumes frits et hachés, piment doux',           price: '7.000', food: '#D17A2A', size: '350 g' },
+      { name: 'Harissa Maison',  desc: 'Piments rouges, ail, carvi et coriandre',        price: '5.500', food: '#C42A1C', size: '200 g' },
     ],
   },
   {
-    id:         'petit' as const,
-    label:      'Petit Cup',
-    sub:        '250 ml',
-    color:      '#18A88A',
-    juiceColor: '#3ECFB0',
-    bg:         '#F0FDFB',
-    border:     '#3ECFB044',
+    id:     'classiques' as const,
+    label:  'Les Classiques',
+    sub:    'Prêts à servir',
+    color:  '#E6A800',
+    bg:     '#FFFBEC',
+    border: '#FFD34E55',
     items: [
-      { name: 'Classic Orange',  desc: 'Oranges de saison, fraîcheur garantie',         price: '4.500' },
-      { name: 'Pomme Gingembre', desc: 'Pomme verte, gingembre frais, citron',          price: '5.000' },
-      { name: 'Menthe Citron',   desc: 'Citron pressé, menthe fraîche, eau pétillante', price: '4.500' },
-      { name: 'Ananas Coco',     desc: 'Ananas, eau de coco, citron vert',              price: '5.000' },
+      { name: 'Couscous Légumes', desc: 'Semoule roulée à la main, légumes de saison', price: '8.000', food: '#E0A92E', size: '800 g' },
+      { name: 'Lablabi',          desc: 'Soupe de pois chiches, cumin et harissa',      price: '6.500', food: '#C9A86A', size: '500 g' },
+      { name: 'Tajine Tunisien',  desc: 'Gratin d\'œufs, fromage et persil frais',      price: '8.500', food: '#C98A3A', size: '500 g' },
+      { name: 'Doigts de Fatma',  desc: 'Briks croustillants farcis (×6)',              price: '7.500', food: '#E3B23C', size: '×6' },
     ],
   },
 ];
+
+type CatId = (typeof CATALOGUE)[number]['id'];
 
 const SPRING: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -140,18 +103,19 @@ function CheckIcon() {
 export default function JuiceMenu() {
   const t = useTranslations('menu');
   const { addItem } = useCart();
-  const [active, setActive] = useState<'bouteille' | 'grand' | 'petit'>('bouteille');
+  const { amount, symbol } = useCurrency();
+  const [active, setActive] = useState<CatId>('mijotes');
   const [addedId, setAddedId] = useState<string | null>(null);
   const current = CATALOGUE.find(c => c.id === active)!;
 
-  const handleAdd = (item: { name: string; desc: string; price: string }) => {
+  const handleAdd = (item: { name: string; desc: string; price: string; food: string; size: string }) => {
     const id = `${active}-${item.name}`;
     addItem({
       id,
       name:   item.name,
-      format: `${current.label} · ${current.sub}`,
+      format: `Conserve · ${item.size}`,
       price:  parseFloat(item.price.replace(',', '.')),
-      color:  current.color,
+      color:  item.food,
     });
     setAddedId(id);
     setTimeout(() => setAddedId(id => (id === `${active}-${item.name}` ? null : id)), 1200);
@@ -170,7 +134,7 @@ export default function JuiceMenu() {
           className="text-center mb-14"
         >
           <span className="inline-block text-coral text-xs font-semibold tracking-[0.22em] uppercase mb-4">
-            — Catalogue · Tunis —
+            — Catalogue · Sfax —
           </span>
           <h2 className="font-playfair text-[clamp(2.2rem,5vw,3.8rem)] font-bold text-warm leading-tight mb-3">
             {t('title')}
@@ -178,14 +142,14 @@ export default function JuiceMenu() {
           <p className="text-warm/50 text-lg max-w-sm mx-auto">{t('subtitle')}</p>
         </motion.div>
 
-        {/* Format tabs */}
+        {/* Category tabs */}
         <div className="flex justify-center mb-10">
           <div className="flex items-center gap-2 bg-white border border-warm/10 rounded-full p-1.5 shadow-sm">
             {CATALOGUE.map(cat => (
               <button
                 key={cat.id}
                 onClick={() => setActive(cat.id)}
-                className="relative px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer"
+                className="relative px-4 sm:px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer"
                 style={active === cat.id
                   ? { background: cat.color, color: '#fff', boxShadow: `0 4px 16px ${cat.color}40` }
                   : { color: '#1A0A0088' }}
@@ -217,14 +181,12 @@ export default function JuiceMenu() {
                 className="group flex items-center gap-4 p-4 rounded-2xl border cursor-pointer transition-all duration-300"
                 style={{ background: current.bg, borderColor: current.border }}
               >
-                {/* Product illustration */}
+                {/* Tin illustration */}
                 <div
                   className="flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden p-1"
                   style={{ background: `${current.color}12` }}
                 >
-                  {active === 'bouteille' && <BottleIcon color={current.color} juiceColor={current.juiceColor} />}
-                  {active === 'grand'     && <GrandCupIcon color={current.color} juiceColor={current.juiceColor} />}
-                  {active === 'petit'     && <PetitCupIcon color={current.color} juiceColor={current.juiceColor} />}
+                  <TinCanIcon accent={current.color} food={item.food} />
                 </div>
 
                 {/* Info */}
@@ -236,7 +198,7 @@ export default function JuiceMenu() {
                 {/* Price + add */}
                 <div className="flex-shrink-0 flex flex-col items-end gap-2">
                   <span className="font-playfair font-bold text-warm text-sm whitespace-nowrap">
-                    {item.price} <span className="text-warm/50 text-xs font-normal">TND</span>
+                    {amount(parseFloat(item.price))} <span className="text-warm/50 text-xs font-normal">{symbol}</span>
                   </span>
                   <motion.button
                     whileHover={{ scale: 1.15 }}
@@ -263,9 +225,9 @@ export default function JuiceMenu() {
           className="mt-10 flex flex-wrap justify-center gap-6 text-center"
         >
           {[
-            { label: 'Pressé à la commande' },
-            { label: 'Sans additifs' },
-            { label: 'Servi frais · Tunis' },
+            { label: 'Recettes traditionnelles' },
+            { label: 'Sans conservateurs' },
+            { label: 'Fait main · Sfax' },
           ].map(({ label }) => (
             <div key={label} className="flex items-center gap-2 text-warm/35 text-sm">
               <span className="w-1 h-1 rounded-full bg-coral/50 inline-block" />

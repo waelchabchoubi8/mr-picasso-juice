@@ -6,9 +6,9 @@ const SPRING: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const VALUES = [
   {
-    title: 'Fraîcheur',
-    desc: 'Chaque jus est pressé à la commande. Aucun jus ne reste plus de 30 minutes avant d\'être servi.',
-    color: '#FF5A1F',
+    title: 'Tradition',
+    desc: 'Des recettes transmises de génération en génération, cuisinées comme à la maison, dans le respect du goût d\'antan.',
+    color: '#CE2029',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><path d="M20 2v4h-4"/>
@@ -17,7 +17,7 @@ const VALUES = [
   },
   {
     title: 'Naturalité',
-    desc: 'Aucun additif, aucun conservateur. Uniquement des fruits frais sélectionnés chaque matin sur le marché.',
+    desc: 'Aucun additif, aucun conservateur. Uniquement des ingrédients frais sélectionnés chaque matin au marché de Sfax.',
     color: '#7ED95A',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -26,8 +26,8 @@ const VALUES = [
     ),
   },
   {
-    title: 'Créativité',
-    desc: 'Nos recettes sont pensées pour surprendre. De l\'Orange Soleil au Tropical Paradise, chaque saveur est une œuvre.',
+    title: 'Praticité',
+    desc: 'La saveur du fait-maison, prête en quelques minutes. Conservez et savourez la Tunisie où que vous soyez.',
     color: '#FFD34E',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -38,10 +38,10 @@ const VALUES = [
 ];
 
 const STATS = [
-  { value: '2020', label: 'Fondé à Tunis' },
-  { value: '24+',  label: 'Recettes artisanales' },
-  { value: '100%', label: 'Fruits frais' },
-  { value: '∞',    label: 'Créations possibles' },
+  { value: '2024', label: 'Fondé à Sfax' },
+  { value: '12+',  label: 'Recettes traditionnelles' },
+  { value: '100%', label: 'Fait maison' },
+  { value: '24',   label: 'Wilayas livrées' },
 ];
 
 export function AboutSection() {
@@ -61,14 +61,14 @@ export function AboutSection() {
               — Notre Histoire —
             </span>
             <h2 className="font-playfair text-[clamp(2.2rem,5vw,3.8rem)] font-bold text-warm leading-tight mb-6">
-              Né à Tunis,<br />
-              <span className="italic text-coral">fait avec passion</span>
+              Né à Sfax,<br />
+              <span className="italic text-coral">fait avec tradition</span>
             </h2>
             <p className="text-warm/60 text-lg leading-relaxed mb-4">
-              Mr. Picasso Juice est né d&apos;une conviction simple : un bon jus peut transformer une journée ordinaire en moment de bonheur pur.
+              Soltana Pro Max est né d&apos;une conviction simple : la cuisine tunisienne mérite d&apos;être savourée partout, à tout moment.
             </p>
             <p className="text-warm/55 text-base leading-relaxed">
-              Depuis 2020, nous sélectionnons chaque matin les meilleurs fruits du marché tunisien pour créer des jus qui ont le goût de la fraîcheur absolue. Chaque verre est une œuvre d&apos;art — pressé à la minute, livré avec soin.
+              Nous cuisinons les plats traditionnels comme à la maison, puis nous les mettons en conserve avec soin pour préserver toute leur saveur. De la mloukhiya à la chakchouka, chaque conserve raconte la Tunisie.
             </p>
           </motion.div>
 

@@ -7,31 +7,31 @@ const SPRING: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const REVIEWS = [
   {
     name: 'Sarra B.',
-    city: 'Tunis',
+    city: 'Sfax',
     rating: 5,
-    text: 'Le meilleur jus d\'orange de Tunis. Frais, pressé à la minute — on sent la différence immédiatement !',
-    fruit: '🍊',
+    text: 'La mloukhiya Soltana a le goût de celle de ma grand-mère. Mijotée comme il faut — un vrai régal !',
+    fruit: '🫙',
   },
   {
     name: 'Ahmed K.',
-    city: 'La Marsa',
+    city: 'Tunis',
     rating: 5,
-    text: 'La Bouteille 1L Tropical Paradise est parfaite pour toute la famille. Je commande chaque semaine sans hésiter.',
-    fruit: '🥭',
+    text: 'J\'ai commandé un grand coffret pour la famille : chakchouka, ojja, couscous… Tout était délicieux et bien emballé.',
+    fruit: '🌶️',
   },
   {
     name: 'Fatma R.',
-    city: 'Carthage',
+    city: 'Sousse',
     rating: 5,
-    text: 'La Palette Picasso est une idée géniale ! J\'ai créé mon propre mélange mangue × fraise et c\'était incroyable.',
-    fruit: '🍓',
+    text: 'Le coffret personnalisé est une idée géniale ! J\'ai rempli mes conserves avec mes plats préférés. Pratique et savoureux.',
+    fruit: '🍲',
   },
   {
     name: 'Youssef M.',
-    city: 'Ennasr',
+    city: 'Sfax',
     rating: 5,
-    text: 'Qualité constante, livraison rapide. Mr. Picasso Juice c\'est notre spot numéro un à Tunis.',
-    fruit: '🍋',
+    text: 'Qualité constante, livraison rapide partout en Tunisie. Soltana Pro Max, c\'est la tradition en conserve.',
+    fruit: '🥘',
   },
 ];
 

@@ -1,15 +1,15 @@
 'use client';
 
 const ITEMS = [
-  'Pressé à la minute',
-  '100% Naturel',
-  'Tunis · Tunisie',
-  'Mr. Picasso Juice',
-  'Sans Additifs',
-  'Jus Artisanal',
-  '24 Recettes',
-  'Fraîcheur Garantie',
-  'Bouteille · Grand Cup · Petit Cup',
+  'Cuisiné comme à la maison',
+  '100% Traditionnel',
+  'Sfax · Tunisie',
+  'Soltana Pro Max',
+  'Sans Conservateurs',
+  'Recettes Authentiques',
+  'Mloukhiya · Chakchouka · Ojja',
+  'La Tradition en Conserve',
+  'Livraison partout en Tunisie',
 ];
 
 const SEP = '·';

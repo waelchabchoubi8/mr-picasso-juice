@@ -65,7 +65,7 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | null>(null);
 
-const STORAGE_KEY = 'mpj-cart';
+const STORAGE_KEY = 'soltana-cart';
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(

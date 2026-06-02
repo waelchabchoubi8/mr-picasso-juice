@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from 'next';
-import { Playfair_Display, Inter } from 'next/font/google';
+import { Playfair_Display, Inter, Cairo } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { CustomCursor } from '@/components/CustomCursor';
 import { FruitBackground } from '@/components/FruitBackground';
 import { CartProvider } from '@/components/CartContext';
+import { CurrencyProvider } from '@/components/CurrencyContext';
 import CartDrawer from '@/components/CartDrawer';
 import { InstallPWA } from '@/components/InstallPWA';
 import '../globals.css';
@@ -25,14 +26,22 @@ const inter = Inter({
   display: 'swap',
 });
 
+// Arabic-capable font (applied for the `ar` locale via globals.css).
+const cairo = Cairo({
+  subsets: ['arabic'],
+  variable: '--font-cairo',
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: 'Mr. Picasso Juice — L\'Art du Jus Frais',
-  description: 'Premium artisanal juice store. Every glass is a masterpiece.',
-  applicationName: 'Mr. Picasso Juice',
+  title: 'Soltana Pro Max — La Tradition en Conserve',
+  description: 'Plats tunisiens traditionnels en conserve : mloukhiya, chakchouka, ojja… Composez votre coffret, livré partout en Tunisie.',
+  applicationName: 'Soltana Pro Max',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Picasso Juice',
+    title: 'Soltana',
   },
   formatDetection: { telephone: false },
   icons: {
@@ -44,14 +53,14 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   openGraph: {
-    title: 'Mr. Picasso Juice',
-    description: 'Premium artisanal juice — pressed to order, crafted with passion.',
+    title: 'Soltana Pro Max',
+    description: 'La cuisine tunisienne traditionnelle, mise en conserve avec soin. Livré partout en Tunisie.',
     type: 'website',
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FF5A1F',
+  themeColor: '#CE2029',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -74,7 +83,8 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${playfair.variable} ${inter.variable}`}
+      dir={locale === 'ar' ? 'rtl' : 'ltr'}
+      className={`${playfair.variable} ${inter.variable} ${cairo.variable}`}
       suppressHydrationWarning
     >
       <body className="bg-[#FFFBF5] text-warm overflow-x-hidden">
@@ -83,9 +93,11 @@ export default async function LocaleLayout({
 
         <CartProvider>
           <NextIntlClientProvider messages={messages}>
-            {children}
-            <CartDrawer />
-            <InstallPWA />
+            <CurrencyProvider>
+              {children}
+              <CartDrawer />
+              <InstallPWA />
+            </CurrencyProvider>
           </NextIntlClientProvider>
         </CartProvider>
       </body>

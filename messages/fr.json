@@ -1,17 +1,31 @@
 {
   "nav": {
     "home": "Accueil",
-    "menu": "Menu",
-    "palette": "Palette",
+    "menu": "Catalogue",
+    "palette": "Coffret",
     "about": "À Propos",
     "orderNow": "Commander",
-    "install": "Installer l'app"
+    "install": "Installer l'app",
+    "currency": "Devise"
+  },
+  "region": {
+    "welcome": "Bienvenue chez Soltana",
+    "question": "Vous commandez d'où ?",
+    "subtitle": "Choisissez votre région pour afficher les bons prix.",
+    "tnLabel": "Je suis en Tunisie",
+    "tnDesc": "Prix en Dinar (TND)",
+    "intlLabel": "Depuis l'étranger",
+    "intlDesc": "Prix en Euro (€)",
+    "aliName": "Ali 5lega Zehya",
+    "aliHi": "Ahla ! Bienvenue 👋",
+    "aliTn": "Tahla fik ! On compte en dinars 🇹🇳",
+    "aliIntl": "Welcome ! Prices in euros 🌍"
   },
   "pwa": {
     "install": "Installer l'app",
-    "tagline": "L'app Picasso, sur votre écran d'accueil",
+    "tagline": "L'app Soltana, sur votre écran d'accueil",
     "titleAndroid": "Installer l'application",
-    "subtitleAndroid": "Ajoutez Mr. Picasso Juice à votre écran d'accueil et commandez en un seul tap.",
+    "subtitleAndroid": "Ajoutez Soltana Pro Max à votre écran d'accueil et commandez en un seul tap.",
     "installCta": "Installer maintenant",
     "titleIOS": "Ajouter à l'écran d'accueil",
     "subtitleIOS": "Installez l'app en 2 étapes depuis Safari :",
@@ -28,23 +42,42 @@
     "benefit3": "Commandez en un seul tap"
   },
   "hero": {
-    "tagline": "L'Art du Jus Frais",
-    "subtitle": "Chaque verre est une œuvre d'art — pressé à la minute, livré avec passion.",
-    "cta": "Explorer le Menu",
-    "badge": "100% Naturel",
-    "createJuice": "Créer mon jus →"
+    "tagline": "La Tradition en Conserve",
+    "subtitle": "Mloukhiya, kleya, chakchouka… Les plats tunisiens authentiques, mijotés avec soin et mis en conserve pour vous.",
+    "cta": "Voir le Catalogue",
+    "badge": "100% Traditionnel",
+    "buildBox": "Composer mon coffret →",
+    "stat1": "Recettes",
+    "stat2": "Tailles",
+    "stat3": "Maison"
   },
   "menu": {
-    "title": "Notre Carte",
-    "subtitle": "Fraîcheur & Créativité dans chaque verre"
+    "title": "Nos Conserves",
+    "subtitle": "Plats traditionnels tunisiens, prêts à savourer"
   },
-  "palette": {
+  "builder": {
     "badge": "Concept Exclusif",
-    "title": "La Palette",
-    "highlight": "Picasso",
-    "subtitle": "Choisissez jusqu'à 3 fruits et composez votre chef-d'œuvre liquide.",
-    "order": "Commander ce jus",
-    "creationLabel": "Votre création:",
-    "hint": "Sélectionnez 1 à 3 fruits pour créer votre jus"
+    "title": "Composez Votre",
+    "highlight": "Coffret",
+    "subtitle": "Choisissez la taille, puis remplissez chaque conserve avec vos plats tunisiens préférés.",
+    "chooseSize": "1. Choisissez la taille",
+    "fillBox": "2. Remplissez votre coffret",
+    "hint": "Remplissez toutes les conserves pour commander votre coffret",
+    "addToCart": "Ajouter le coffret",
+    "full": "Coffret complet !",
+    "reset": "Réinitialiser",
+    "creationLabel": "Votre coffret :",
+    "emptyHint": "Choisissez une taille pour commencer",
+    "cans": "conserves",
+    "remaining": "restantes",
+    "popular": "Populaire",
+    "save": "Économisez",
+    "chef": {
+      "start": "Choisis ta taille, on emballe.",
+      "skeptical": "Hmm. On commence ?",
+      "warming": ["Bien.", "Continue comme ça.", "Pas mal du tout."],
+      "intoIt": "Presque ! Encore {remaining}.",
+      "perfect": "Voilà ! Un vrai coffret."
+    }
   }
 }

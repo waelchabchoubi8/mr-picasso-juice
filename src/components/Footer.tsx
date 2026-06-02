@@ -45,17 +45,16 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-coral to-sunny flex items-center justify-center shadow-md">
-                <span className="text-white font-playfair font-bold text-base">P</span>
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt="Soltana Pro Max" width={40} height={40} className="w-10 h-10 rounded-full object-cover shadow-md" />
               <div>
-                <p className="font-playfair text-white font-semibold text-sm leading-tight">Mr. Picasso Juice</p>
-                <p className="text-white/35 text-xs">Tunis, Tunisie</p>
+                <p className="font-playfair text-white font-semibold text-sm leading-tight">Soltana Pro Max</p>
+                <p className="text-white/35 text-xs">Sfax, Tunisie</p>
               </div>
             </div>
             <p className="text-white/45 text-sm leading-relaxed">
-              Jus artisanaux pressés à la minute.<br />
-              L&apos;art du jus frais depuis 2020.
+              Plats tunisiens traditionnels, mis en conserve.<br />
+              La tradition en conserve, livrée partout.
             </p>
 
             {/* Social links */}
@@ -79,8 +78,8 @@ export function Footer() {
             <ul className="space-y-2.5">
               {[
                 { label: 'Accueil', href: '/' },
-                { label: 'Notre Carte', href: '/#menu' },
-                { label: 'Palette Picasso', href: '/#palette' },
+                { label: 'Catalogue', href: '/#menu' },
+                { label: 'Composer un coffret', href: '/#palette' },
                 { label: 'Notre Histoire', href: '/#about' },
               ].map(l => (
                 <li key={l.label}>
@@ -113,7 +112,7 @@ export function Footer() {
                 <svg className="mt-0.5 flex-shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                 </svg>
-                <span className="text-white/50 leading-relaxed">Votre adresse, Tunis<br/>Tunisie</span>
+                <span className="text-white/50 leading-relaxed">Votre adresse, Sfax<br/>Tunisie</span>
               </li>
               <li className="flex gap-2.5 items-center">
                 <svg className="flex-shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -127,14 +126,14 @@ export function Footer() {
                 <svg className="flex-shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
                 </svg>
-                <a href="mailto:contact@mrpicassojuice.tn" className="text-white/50 hover:text-white transition-colors cursor-pointer text-xs">
-                  contact@mrpicassojuice.tn
+                <a href="mailto:contact@soltana.tn" className="text-white/50 hover:text-white transition-colors cursor-pointer text-xs">
+                  contact@soltana.tn
                 </a>
               </li>
             </ul>
 
             <a
-              href={`https://wa.me/21600000000?text=${encodeURIComponent('Bonjour Mr. Picasso Juice, je voudrais commander.')}`}
+              href={`https://wa.me/21600000000?text=${encodeURIComponent('Bonjour Soltana Pro Max, je voudrais commander.')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-5 bg-[#25D366]/20 hover:bg-[#25D366]/30 text-[#25D366] text-xs font-semibold px-4 py-2 rounded-full transition-colors duration-200 cursor-pointer"
@@ -150,7 +149,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/25">
-          <p>© 2025 Mr. Picasso Juice · Tunis, Tunisie · Tous droits réservés</p>
+          <p>© 2025 Soltana Pro Max · Sfax, Tunisie · Tous droits réservés</p>
           <a
             href="https://ait-tun.com"
             target="_blank"

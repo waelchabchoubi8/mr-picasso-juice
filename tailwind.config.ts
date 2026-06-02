@@ -14,7 +14,9 @@ const config: Config = {
         sans: ['var(--font-inter)', 'Inter', 'sans-serif'],
       },
       colors: {
-        coral:  '#FF5A1F',
+        coral:  '#CE2029',
+        red:    '#CE2029',
+        crimson:'#9E1B22',
         sunny:  '#FFD34E',
         teal:   '#3ECFB0',
         lime:   '#7ED95A',
